@@ -1,20 +1,157 @@
 <template>
-  <div class="dashboard">
-    <h1>God's Speed all</h1>
-    <h2>don't for get to create a branch and push to the branch</h2>
+  <div class="dashBoard">
+    <section class="dashTop">
+      <div class="dashText">
+        <h4>Ever had a Dream <br> of Becoming a Software <br>
+        <span>Engineer?</span> </h4>
+        <p> Join enyata academy today and bring your long <br> awaiting dream to reality.</p>
+        <input type="submit" value="Register Now"  @click="toRegister">
+      </div>
+      <div class="dashImg">
+        <img src="../assets/dashboard/dashboardimg.png" alt="">
+      </div>
+    </section>
+    <section class="dashBut" >
+      <div class="dashButfirst" >
+        <p></p>
+        <h4>Why us?</h4>
+      </div>
+      <div class="dashArt">
+        <article class="colored">
+          <h4>Learn from the best</h4>
+          <p>Amet minim mollit non deserunt <br> ullamco est sit aliqua dolor do <br> amet sint. Velit officia consequat <br> duis enim velit mollit. Exercitation <br> amet.</p>
+        </article>
+         <article>
+          <h4>100% online classes </h4>
+          <p>Amet minim mollit non deserunt <br> ullamco est sit aliqua dolor do <br> amet sint. Velit officia consequat <br> duis enim velit mollit. Exercitation <br> amet.</p>
+        </article>
+         <article class="colored">
+          <h4>Get paid while learning </h4>
+          <p>Amet minim mollit non deserunt <br> ullamco est sit aliqua dolor do <br> amet sint. Velit officia consequat <br> duis enim velit mollit. Exercitation <br> amet.</p>
+        </article>
+         <article>
+          <h4>Work on real project</h4>
+          <p>Amet minim mollit non deserunt <br> ullamco est sit aliqua dolor do <br> amet sint. Velit officia consequat <br> duis enim velit mollit. Exercitation <br> amet.</p>
+        </article>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'landingPage',
-  props: {
-    
+  name: 'dashBoard',
+  data: () => ({
+  
+  }),
+  methods: {
+    gotoRegister(){
+      
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .dashTop{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+  }
 
+  .dashText{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dashText h4{
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 57px;
+    letter-spacing: 0.035em;
+    color: #211F26;
+  }
+
+  .dashText span{
+    color: #7557D3;
+  }
+
+  .dashText p{
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0.02em;
+    color: rgba(33, 31, 38, 0.71);
+  }
+
+  .dashText input{
+    background: #7557D3;
+    border-radius: 2px;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    width: 152px;
+    cursor: pointer;
+  }
+
+.dashButfirst{
+  display: flex;
+  align-items: center;
+}
+
+.dashButfirst p{
+  border: solid 1px #FDC840;
+  width: 34px;
+  height: 0px;
+  margin-right: 20px;
+}
+
+.dashButfirst h4{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 140%;
+  letter-spacing: 0.01em;
+  color: #211F26;
+}
+
+.dashArt{
+  display: flex;
+}
+
+.dashArt article{
+  padding: 24px;
+  width: 100%;
+}
+.dashArt article h4{
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: 0.01em;
+  color: #211F26;
+}
+.dashArt article p{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 156%;
+  letter-spacing: 0.01em;
+  color: rgba(33, 31, 38, 0.6);
+}
+
+.colored{
+  background: rgba(117, 87, 211, 0.1);
+}
+
+
+  @media (max-width: 720px){
+    .dashImg img{
+      display: none;
+    }
+    .dashArt{
+      display: grid;
+      /* grid-template-columns: auto auto; */
+    }
+    .dashArt article{
+      padding: 2px;
+      text-align: center;
+    }
+  }
 </style>
