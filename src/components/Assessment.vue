@@ -1,30 +1,36 @@
+import firstdashboard from '@/components/firstdashboard.vue';
 <template>
   <div class="container">
-  <!-- <first-dashboard></first-dashboard> -->
-<div class="assessment">
-    <div class="assessment-and-timer icon">
-      <div><h1>Take Assessment</h1>
-      <p>Click the button below to start assessment, you have limited time for this test</p>
+    <firstdashboard/>
+    <div class="assessment">
+      <div class="assessment-and-timer">
+        <div class="assessmentDiv">
+          <h1>Take Assessment</h1>
+          <p>Click the button below to start assessment, you have limited time for this test</p>
+        </div>
+        <div class="timer-icon">
+            <p>Timer</p>
+            <p>00<span>min</span>000<span>sec</span></p>
+        </div>
       </div>
-      <div class="timer-icon">
-          <p>Timer</p>
-          <p>00<span>min</span>000<span>sec</span></p>
+      <div class="center-icon">
+        <div class="icon">
+              <img src="../assets/dashboardone/hourglass.png" alt="">
+        </div>
+        <p>We have 4 days left until the next assessment<br>
+            Watch this space</p>
+        <ButtonComponent width="205" height="41"> Start Assessment</ButtonComponent>
       </div>
     </div>
-  <div class="center-icon">
-    <div class="icon">
-        <img src="../assets/dashboardone/hourglass.png" alt="">
-    </div>
-     <p>We have 4 days left until the next assessment<br>
-      Watch this space</p>
-    <ButtonComponent width="205" height="41"> Start Assessment</ButtonComponent>
-      </div>
-  </div>
   </div>
 </template>
 <script>
+import firstdashboard from './firstdashboard.vue'
 export default {
-  name: 'first-dashboard',
+  name: 'Assessment-',
+  components:{
+    firstdashboard,
+  },
   data: () => ({
   
   }),
@@ -33,11 +39,11 @@ export default {
 
 
 <style scoped>
-<!-- .container{
+.container{
   display: flex;
   gap: 47px;
-} -->
-.assessment-and-timer_icon{
+}
+.assessment-and-timer{
   display: flex;
   justify-content: space-between;
 }
@@ -45,24 +51,25 @@ export default {
   padding-top: 107px;
   padding-right: 82px;
   width: 100%;
+  margin-left: 350px
 } 
-.assessment-and-timer_icon h1{
+.assessmentDiv h1{
   font-family: 'Lato';
 font-style: normal;
 font-weight: 300;
-font-size: 43.5555px;
+font-size: 43px;
 line-height: 52px;
 letter-spacing: -0.02em;
 color: #2B3C4E;
 }
-.assessment-and-timer_icon p{
+.assessmentDiv p{
   margin-top: 14px;
   font-family: 'Lato';
-font-style: italic;
-font-weight: 500;
-font-size: 16px;
-line-height: 19px;
-color: #2B3C4E;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2B3C4E;
 }
 
 .timer-icon p:first-child{

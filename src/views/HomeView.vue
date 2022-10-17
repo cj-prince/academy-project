@@ -1,9 +1,7 @@
 <template>
-<!-- <firstdashboard> </firstdashboard>
-<seconddashform></seconddashform> -->
-<Assessment></Assessment>
-<!-- <Questions></Questions>
-<AssessmentCompleted></AssessmentCompleted> -->
+
+<Assessment/>
+
 </template>
 
 <script>
