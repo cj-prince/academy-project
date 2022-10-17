@@ -5,7 +5,7 @@
     </div>
     <div class="navText">
       <p> Home</p>
-      <p>Sign in</p>
+      <router-link to="/sigin"><p>Sign in</p></router-link> 
     </div>
   </div>
 </template>

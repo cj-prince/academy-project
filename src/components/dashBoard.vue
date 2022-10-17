@@ -5,7 +5,7 @@
         <h4>Ever had a Dream <br> of Becoming a Software <br>
         <span>Engineer?</span> </h4>
         <p> Join enyata academy today and bring your long <br> awaiting dream to reality.</p>
-        <input type="submit" value="Register Now"  @click="toRegister">
+    <router-link to="/signup"><input type="submit" value="Register"/></router-link>  
       </div>
       <div class="dashImg">
         <img src="../assets/dashboard/dashboardimg.png" alt="">

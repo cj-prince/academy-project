@@ -1,29 +1,33 @@
 <template>
-  <div class="home">
-    <NavBar/>
-    <DashBoard />
-  </div>
-  <Footer />
+     
+   <div class="home"> 
+     <NavBar/>  
+   <DashBoard />  
+   </div> 
+   <Footer />   
 </template>
 
 <script>
 // @ is an alias to /src
-import DashBoard from '@/components/dashBoard.vue'
-import NavBar from '@/components/navBar';
+ import DashBoard from '@/components/dashBoard.vue'
+ import NavBar from '@/components/navBar';
 import Footer from "@/components/footer"
-
+ 
 export default {
+  props: {
+  },
   name: 'HomeView',
   components: {
-    DashBoard,
+     DashBoard,
     NavBar,
-    Footer
-  }
+    Footer,
+   
+}
 }
 </script>
 
 <style>
-.home{
+.home {
   width: calc(100vw - 136px);
   margin-inline: auto;
 }
