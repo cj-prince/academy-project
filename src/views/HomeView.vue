@@ -1,7 +1,9 @@
 <template>
-<firstdashboard> </firstdashboard>
-<seconddashform></seconddashform>
-<anotherdashboard></anotherdashboard>
+<!-- <firstdashboard> </firstdashboard>
+<seconddashform></seconddashform> -->
+<Assessment></Assessment>
+<!-- <Questions></Questions>
+<AssessmentCompleted></AssessmentCompleted> -->
 </template>
 
 <script>
@@ -10,17 +12,21 @@
 // import NavBar from '@/components/navBar';
 // import Footer from "@/components/footer"
 
-import firstdashboard from '@/components/firstdashboard.vue'
-import seconddashform from '@/components/seconddashform'
-import anotherdashboard from '@/components/anotherdashboard'
+// import firstdashboard from '@/components/firstdashboard.vue'
+// import seconddashform from '@/components/seconddashform'
+import Assessment from '@/components/Assessment.vue'
+// import Questions from '@/components/Questions.vue'
+// import AssessmentCompleted from '@/components/Assessment-completed.vue'
 
 
 export default {
   name: 'HomeView',
   components: {
-  firstdashboard,
-  seconddashform,
-  anotherdashboard,
+  // firstdashboard,
+  // seconddashform,
+  Assessment,
+  // Questions,
+  // AssessmentCompleted,
     // DashBoard,
     // NavBar,
     // Footer
