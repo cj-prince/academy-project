@@ -1,62 +1,69 @@
 <template>
   <div class="container">
-  <first-dashboard></first-dashboard>
+  <firstdashboard/>
 
-  <div class="assessment-icon">
-      <div class="assessment-and-timer-icon">
-      <div>
+  <div class="assessment">
+      <div class="assessment-and-timer">
       <h1>Assessment Completed</h1>
-
       <p>Thank you!</p>
-      </div>
-
       <div class="timer">
           <p>Timer</p>
           <p>23<span>min</span>043<span>sec</span></p>
+        </div>
       </div>
-      </div>
-
-
-      <div class="center-icon">
+      <div class="center-content">
           <div class="icon">
-              <img src="../assets/dashboardone/congratution-icon.png" alt="">
+              <img src="../assets/dashboardone/confetti.png" alt="">
           </div>
           <p>We have received your assessment test, we will get back to you soon. <br>
-Best of luck</p>
-<ButtonComponent width="205" height="41"> Home</ButtonComponent>
+        Best of luck</p>
+        <router-link to="/"><button>Home</button></router-link>
       </div>
   </div>
   </div>
 </template>
-<script>
-export default {
-  name: 'first-dashboard',
-  data: () => ({
 
-  }),
+<script>
+import firstdashboard from './firstdashboard.vue'
+export default {
+  name: 'assessment-completed',
+  components:{
+    firstdashboard,
+  },
+  data() {
+  return{}},
 }
 </script>
+
+
 <style scoped>
 .container{
   display: flex;
   gap: 47px;
 }
-.assessment-icon{
+.assessment{
   padding-top: 107px;
   padding-right: 82px;
- 
+  align-items:center;
   width: 100%;
 }
-.assessment-icon h1{
-  font-family: 'Lato';
+.assessment h1{
 font-style: normal;
 font-weight: 300;
 font-size: 43.5555px;
 line-height: 52px;
 letter-spacing: -0.02em;
 color: #2B3C4E;
+margin-bottom:12px;
 }
-.assessment-icon p{
+.timer{
+  display: flex;
+  justify-content: space-between;
+  margin:left;
+  margin-top: auto;
+  
+}
+.assessment p{
   margin-top: 14px;
   font-family: 'Lato';
 font-style: italic;
@@ -65,13 +72,14 @@ font-size: 16px;
 line-height: 19px;
 color: #2B3C4E;
 }
-.assessment-and-timer-icon{
+.assessment-and-timer{
   display: flex;
   justify-content: space-between;
-  
-  
+  margin-left:47px;
+  margin-bottom:130px;
+
 }
-.timer-icon p:first-child{
+.timer p:first-child{
   font-family: 'Lato';
 font-style: normal;
 font-weight: 400;
@@ -79,7 +87,7 @@ font-size: 14px;
 line-height: 17px;
 color: #4F4F4F;
 }
-.timer-icon p:nth-of-type(2) {
+.timer p:nth-of-type(2) {
 font-family: 'Lato';
 font-style: normal;
 font-weight: 300;
@@ -87,7 +95,7 @@ font-size: 48px;
 line-height: 58px;
 color: #2B3C4E;    
 }
-.timer-icon p:nth-of-type(2) span{
+.timer p:nth-of-type(2) span{
   font-family: 'Lato';
 font-style: normal;
 font-weight: 400;
@@ -95,14 +103,15 @@ font-size: 12px;
 line-height: 14px;
 color: #4F4F4F;
 }
-.center-icon{
+.center-content{
+  
   height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.center-icon p{
+.center-content p{
   font-family: 'Lato';
 font-style: normal;
 font-weight: 400;

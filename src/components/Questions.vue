@@ -1,15 +1,14 @@
 <template>
   <div class="container">
- <first-dashboard></first-dashboard>
-  <div class="assessment-icon">
+    <firstdashboard/>
+    <div class="assessment">
       <div class="assessment-and-timer">
-          <div>
-              <h1>Take Assessment</h1>
-              <p>Click the finish button below to submit assessment, you can go back at any time to edit your<br>
-              answers.</p>
-          </div>
-      <div class="timer-icon">
-        <p>Timer</p>
+        <div class="assessmentDiv">
+          <h1>Take Assessment</h1>
+          <p>Click the button below to start assessment, you have limited time for this test</p>
+        </div>
+        <div class="timer-icon">
+            <p>Timer</p>
         <p>00<span>min</span>010<span>sec</span></p>
       </div>
       </div>
@@ -43,11 +42,17 @@
 </template>
 
 <script>
+import firstdashboard from './firstdashboard.vue'
 export default {
-  name: 'first-dashboard',
-  data: () => ({
-
-  }),
+  name: 'Questions-',
+  components:{
+    firstdashboard,
+  },
+  data() {
+  return{
+  isActive:false
+  }
+  },
 }
 </script>
 
@@ -65,14 +70,24 @@ padding:0;
   display: flex;
   gap: 47px;
 }
-.assessment-icon{
-  padding-top: 107px;
-  padding-right: 82px;
- 
-  width: 100%;
+.assessment{
+margin: 90px 0 8px 292px;
+width: 100%;
+padding: 0 47px;
+width: 100%;
 }
-.assessment-icon h1{
-  font-family: 'Lato';
+.assessment-and-timer{
+display: flex;
+justify-content: space-between;
+margin-left: 47px;
+margin-bottom: 64px;
+}
+.assessmentDiv {
+align-items: center;
+}
+
+.assessmentDiv h1{
+margin-bottom: 14px;
 font-style: normal;
 font-weight: 300;
 font-size: 43.5555px;
@@ -80,18 +95,13 @@ line-height: 52px;
 letter-spacing: -0.02em;
 color: #2B3C4E;
 }
-.assessment-icon p{
-  margin-top: 14px;
-  font-family: 'Lato';
+.assessmentDiv p{
+margin-top: 14px;
 font-style: italic;
 font-weight: 500;
 font-size: 16px;
 line-height: 19px;
 color: #2B3C4E;
-}
-.assessment-and-timer{
-  display: flex;
-  justify-content: space-between;
 }
 .timer-icon p:first-child{
   font-family: 'Lato';
@@ -119,66 +129,94 @@ color: #4F4F4F;
 }
 .questions{
   margin-top: 64px;
+  display: flex;
+    flex-direction: column;
+    width: 406px;
+    height: 299px;
+    margin-left: 47px;
+    margin-bottom:206px;
 }
 .questions p{
-  font-family: 'Lato';
 font-style: italic;
 font-weight: 500;
 font-size: 14px;
 line-height: 17px;
 color: #2B3C4E;
+width: 65px;
+height: 17px;
+margin-bottom:14px;
 }
-.active{
-width: 355.08px;
-height: 33px;
-background: #31D283;
-}
+
 .questions h2{
-font-family: 'Lato';
 font-style: italic;
 font-weight: 500;
 font-size: 24px;
 line-height: 29px;
 color: #2B3C4E;
 margin-top: 14px;  
+display:inline-block;
+width: 406px;
+height: 29px;
+margin-bottom:48px;
 }
-.navigate{
-    display: flex;
-    flex-direction:column;
-    margin-left:193px;
-    margin-bottom:80px;
-    margin-top:80px;
-    justify-content:center;
-    align-items: center;
+input{
+    width: 8px;
+    height: 8px;
+    margin-right:42px;
+    border: 1px solid #2B3C4E;
+    margin-bottom: 37px;
+}
+label{
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    width: 252px;
+    height: 20px;
+    color: #2B3C4E;
+}
+.active{
+width: 355.08px;
+height: 33px;
+background: #31D283;
 }
 .buttons-icon{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    margin-bottom:80px;
+display:flex;
+flex-direction:column;
+margin-left:193px;
+margin-bottom: 80px;
+margin-top:80px;
+justify-content:center;
+align-items: center;
+}
+.buttons{
+display:flex;
+flex-direction:row;
+align-items:center;
+margin-bottom:80px;
 }
 .previous{
-    border: 1px solid #00000040;
-    width: 125px;
-    height: 41px;
-    margin-right:220px;
-    color:#211F26;
+border: 1px solid #00000040;
+width: 125px;
+height: 41px;
+margin-right:220px;
+color:#211F26;
 }
 .next{
-    width: 125px;
-    height: 41px;
-    background-color:#7557D3;
-    color:white;
-    border-radius:4px;
-    border:none;
+width: 125px;
+height: 41px;
+background-color:#7557D3;
+color:white;
+border-radius:4px;
+border:none;
 }
 .finish{
-    width: 205px;
-    height: 41px;
-    background-color: #CECECE;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    margin-bottom:206px;
+width: 205px;
+height: 41px;
+background-color: #CECECE;
+color: white;
+border: none;
+border-radius: 4px;
+margin-bottom:206px;
 }
 </style>

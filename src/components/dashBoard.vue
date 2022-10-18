@@ -7,8 +7,7 @@
         <p> Join enyata academy today and bring your long <br> awaiting dream to reality.</p>
         <input type="submit" value="Register Now"  @click="toRegister">
       </div>
-      <div class="dashImg">
-        <img src="../assets/dashboard/dashboardimg.png" alt="">
+    
       </div>
     </section>
     <section class="dashBut" >

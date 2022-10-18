@@ -1,7 +1,9 @@
 <template>
-
-<Assessment/>
-
+   <!-- <firstdashboard/>   -->
+<!-- <Assessment/> -->
+<!-- <Questions/> -->
+<!-- <Assessmentcompleted/> -->
+<Assessmentcompleted/>
 </template>
 
 <script>
@@ -11,10 +13,10 @@
 // import Footer from "@/components/footer"
 
 // import firstdashboard from '@/components/firstdashboard.vue'
-// import seconddashform from '@/components/seconddashform'
-import Assessment from '@/components/Assessment.vue'
+// // import seconddashform from '@/components/seconddashform'
+// import Assessment from '@/components/Assessment.vue'
 // import Questions from '@/components/Questions.vue'
-// import AssessmentCompleted from '@/components/Assessment-completed.vue'
+import Assessmentcompleted from '@/components/Assessment-completed.vue'
 
 
 export default {
@@ -22,12 +24,10 @@ export default {
   components: {
   // firstdashboard,
   // seconddashform,
-  Assessment,
+  // Assessment,
   // Questions,
-  // AssessmentCompleted,
-    // DashBoard,
-    // NavBar,
-    // Footer
+  Assessmentcompleted,
+   
   }
 }
 </script>
