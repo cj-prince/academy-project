@@ -7,9 +7,7 @@
         <p> Join enyata academy today and bring your long <br> awaiting dream to reality.</p>
         <input type="submit" value="Register Now"  @click="toRegister">
       </div>
-    
-      </div>
-    </section>
+    </section> 
     <section class="dashBut" >
       <div class="dashButfirst" >
         <p></p>
