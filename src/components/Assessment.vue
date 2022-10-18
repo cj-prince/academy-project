@@ -73,7 +73,6 @@ padding: 0 47px;
   padding-top: 107px;
   padding-right: 82px;
   width: 100%;
-  margin-left: 350px
 } 
 .assessmentDiv h1{
 font-style: normal;
