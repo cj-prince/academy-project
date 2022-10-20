@@ -1,34 +1,40 @@
 <template>
   <div class="container">
     <div class="header">
-      <div class="log-container">
+      <div class="logo-container">
         <img src="../assets/dashboard/logo.png" alt="logo" />
         <p class="title">Sign Up</p>
       </div>
-      <form class="form-wrapper">
+      <form class="form-wrapper" @submit.prevent= "handleSubmit">
         <div class="form-container">
           <div class="first-form">
             <label for="fname">First Name</label><br />
-            <input type="text" id="fname" name="fname" /><br />
+            <input type="text" id="fname"
+             name="fname"
+             v-model="first_name"/><br />
             <label for="lname">Email Address</label><br />
-            <input type="email" id="email" name="email" /><br />
+            <input type="email" id="email"
+            name="email" v-model="email"/><br />
             <label for="password">Password</label><br />
-            <input type="password" id="password" name="password" /><br />
+            <input type="password" id="password" 
+            name="password" v-model="password"/><br />
           </div>
           <div class="second-form">
             <label for="lname">Last Name</label><br />
-            <input type="text" id="lname" name="lname" /><br />
+            <input type="text" id="lname" name="lname" v-model="last_name"/><br />
             <label for="tel">Phone Number</label><br />
-            <input type="tel" id="tel" name="phone-number" /><br />
+            <input type="tel" id="tel" 
+            name="tel" v-model="phone_number"/><br />
             <label for="confirm-password">Confirm Password</label><br />
             <input
               type="password"
-              id="confirm-password"
-              name="confirm-password"
-            /><br />
+              id="cpassword"
+              name="cpassword" v-model="password_confirm"/><br/>      
           </div>
         </div>
-       <router-link to='/sigin'><button class="sign-up">Sign Up</button></router-link> 
+       <!-- <router-link to='/sigin'> -->
+        <button class="sign-up" >Sign Up</button>
+      <!-- </router-link>   -->
       </form>
       <p class="sign-in">
         Already have an account? <router-link to="/sigin">Sign In</router-link>
@@ -38,9 +44,35 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
    name: "signupView",
-};
+   data(){
+    return{
+     first_name:'',
+     last_name:'',
+     email:'',
+     phone_number:'',
+     password:'',
+     password_confirm:'',
+    }
+   },
+
+   methods:{
+  async  handleSubmit() {
+ const response = await axios.post('signup', {
+    first_name: this.first_name,
+    email_name: this.email_name,
+    phone_number: this.phone_number,
+    password_name: this.password,
+    password_confirm: this.password_confirm,
+  });
+
+  console.log(response)
+    }
+    }
+}
+
 </script>
 
 <style scoped>
@@ -48,12 +80,8 @@ export default {
 body {
   font-family: "Lato", sans-serif;
 }
-.container {
-  background: white;
-  
-  background-repeat: no-repeat;
-  background-position: right -8% top -10%;
-  padding-top: 100px;
+.container{
+   padding-top: 100px;
 }
 .header {
   width: 784px;
