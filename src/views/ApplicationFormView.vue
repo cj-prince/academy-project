@@ -38,7 +38,10 @@
             <input type="text" id="cgpa" name="cgpa" /><br />
           </div>
         </div>
-       <router-link  to="/"><button class="submit">Submit</button></router-link> 
+        <div class="submitDiv">
+            <router-link  to="/"><button class="submit">Submit</button></router-link>
+        </div>
+        
       </form>
     </div>
   </div>
@@ -122,7 +125,10 @@ input {
 input:focus {
   border: 1.5px solid #2b3c4e;
 }
-
+.submitDiv{
+  display: flex;
+  justify-content: center;
+}
 .submit {
   width: 379px;
   height: 50px;
@@ -131,7 +137,6 @@ input:focus {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin: 0 auto;
   margin-top: 43px;
   font-weight: 700;
   font-size: 16px;

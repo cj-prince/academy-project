@@ -10,7 +10,7 @@
         <input type="email" id="email" name="email" /><br />
         <label for="password">Password</label><br />
         <input type="password" id="password" name="password" /><br />
-       <router-link to='/ApplicationFormView'><button class="sign in">Sign In</button></router-link> 
+       <router-link to='/ApplicationFormView'><button class="signin">Sign In</button></router-link> 
       </form>
       <div class="footer">
         <p>
@@ -70,13 +70,13 @@ label {
 }
 input {
   width: 100%;
-  height: 48px;
+  height: 40px;
   border: 1.5px solid #bdbdbd;
-  padding: 15px;
+  padding: 8px;
   border-radius: 4px;
 }
-.sigin {
-  width: 100%;
+.signin {
+  width: 397px;
   height: 50px;
   background: #7557d3;
   color: white;
@@ -93,6 +93,7 @@ input {
   width: 380px;
   margin: 0 auto;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   font-style: italic;
   font-weight: 500;

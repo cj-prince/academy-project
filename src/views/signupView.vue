@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <div class="log-container">
+      <div class="logo-container">
         <img src="../assets/dashboard/logo.png" alt="logo" />
         <p class="title">Sign Up</p>
       </div>
@@ -28,7 +28,10 @@
             /><br />
           </div>
         </div>
-       <router-link to='/sigin'><button class="sign-up">Sign Up</button></router-link> 
+        <div class="signinDiv">
+          <router-link to='/sigin'><button class="sign-up">Sign Up</button></router-link> 
+        </div>
+       
       </form>
       <p class="sign-in">
         Already have an account? <router-link to="/sigin">Sign In</router-link>
@@ -44,13 +47,9 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-body {
-  font-family: "Lato", sans-serif;
-}
 .container {
+  font-family: "Lato", sans-serif;
   background: white;
-  
   background-repeat: no-repeat;
   background-position: right -8% top -10%;
   padding-top: 100px;
@@ -80,12 +79,13 @@ body {
   font-style: italic;
 }
 .form-wrapper {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
 }
 .form-container{
   display: flex;
   justify-content: space-between;
+  gap: 64px
 }
 label {
   font-weight: 500;
@@ -98,10 +98,14 @@ label {
 }
 input {
   width: 365px;
-  height: 48px;
+  height: 40px;
   border: 1.5px solid #bdbdbd;
   border-radius: 4px;
-  padding: 15px;
+  padding: 8px;
+}
+.signinDiv{
+  display: flex;
+  justify-content: center;
 }
 .sign-up {
   width: 520px;
