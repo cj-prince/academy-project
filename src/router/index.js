@@ -11,25 +11,25 @@ const routes = [
     path: '/signup',
     name: 'signup',
    
-    component: () => import(/* webpackChunkName: "about" */ '../views/signupView.vue')
+    component: () => import('../views/signupView.vue')
   },
   {
     path: '/sigin',
     name: 'sigin',
    
-    component: () => import(/* webpackChunkName: "about" */ '../views/siginView.vue')
+    component: () => import('../views/siginView.vue')
   },
   {
-    path: '/ForgotPdView',
+    path: '/passwordreset',
     name: 'ForgotPdView',
    
-    component: () => import(/* webpackChunkName: "about" */ '../views/ForgotPdView.vue')
+    component: () => import('../views/ForgotPdView.vue')
   },
   {
-    path: '/ApplicationFormView',
+    path: '/applicationform',
     name: 'ApplicationFormView',
    
-    component: () => import(/* webpackChunkName: "about" */ '../views/ApplicationFormView')
+    component: () => import('../views/ApplicationFormView')
   }
 ]
 

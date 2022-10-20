@@ -5,12 +5,14 @@
         <img src="../assets/dashboard/logo.png" alt="logo">
         <p class="title">Log In</p>
       </div>
-      <form action="">
+      <form action="" @submit.prevent= "handleSubmit">
+        <span v-if="errorField">enter field</span>
         <label for="lname">Email Address</label><br />
-        <input type="email" id="email" name="email" /><br />
+        <input type="email" id="email" name="email" v-model="user.email"/><br />
         <label for="password">Password</label><br />
-        <input type="password" id="password" name="password" /><br />
-       <router-link to='/ApplicationFormView'><button class="signin">Sign In</button></router-link> 
+        <span v-if="passwordCheck">Password incorrect</span>
+        <input type="password" id="password" name="password" v-model="user.password"/><br />
+        <router-link to="/applicationform"><button class="signin">Sign In</button></router-link>
       </form>
       <div class="footer">
         <p>
@@ -25,14 +27,40 @@
 </template>
 
 <script>
+// import axios from 'axios'
 export default {
   name: "ForgotPdView",
+  data: () =>({
+    user:{email:"",password:""},
+    errorField: false,
+    passwordCheck: false
+  }),
+  methods:{
+    // async  handleSubmit() {
+    //   if(!this.user.email||!this.user.password){
+    //     return this.errorField = true
+    //   }
+    //   if(this.user.password.length < 8){
+    //     this.passwordCheck = true
+    //   }
+    //   try {
+    //     const response = await axios.post('http://localhost:5000/students/login', {
+    //       email: this.email,
+    //       password: this.password,
+    //     });
+    //     console.log(response)
+    //     sessionStorage.setItem("session", JSON.stringify(response.token));
+    //      this.$router.push('/ApplicationFormView')
+    //   } catch (error) {
+    //     console.log(error)
+    //   }  
+    // }
+  }
 };
 </script>
 
 <style scoped>
 .container{
-  
   padding-top: 100px;
 }
 .logo-container {

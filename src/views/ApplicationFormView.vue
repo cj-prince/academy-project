@@ -49,18 +49,13 @@
   
 <script>
 export default {
-   name: "ApplicationFormView",
+  name: "ApplicationFormView",
 };
 </script>
   
 <style scope>
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-
-body {
-  font-family: "Lato", sans-serif;
-}
-
 .container {
+  font-family: "Lato", sans-serif;
   background-position: right -23.82% top -84.06%;
   padding-top: 100px;
   padding-bottom: 100px;
