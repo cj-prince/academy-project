@@ -15,12 +15,11 @@ body{
   padding: 0;
   margin: 0;
 }
+
 #app {
-  font-family: 'Poppins', 'Lato', sans-serif;;
+  font-family: 'Poppins','Lato' sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.main{
-  
-}
+
 </style>

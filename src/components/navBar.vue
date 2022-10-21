@@ -4,8 +4,8 @@
       <img src="../assets/dashboard/logo.png" alt="">
     </div>
     <div class="navText">
-      <p> Home</p>
-      <p>Sign in</p>
+      <router-link to="/"><p> Home</p></router-link>
+      <router-link to="/sigin"><p>Sign in</p></router-link> 
     </div>
   </div>
 </template>
@@ -38,6 +38,11 @@
   cursor: pointer;
   color: rgba(33, 31, 38, 0.71);
   line-height: 24px;
+}
+
+a{
+  outline: none;
+  text-decoration: none;
 }
 
 </style>
