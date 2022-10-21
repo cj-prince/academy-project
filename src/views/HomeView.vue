@@ -1,11 +1,11 @@
 <template>
 
 <h1></h1>
-   <div class="home"> 
-     <NavBar/>  
-   <DashBoard />  
-   </div> 
-   <Footer />   
+  <div class="home"> 
+    <NavBar/>  
+    <DashBoard />  
+  </div> 
+    <Footer />   
 </template>
 
 <script>

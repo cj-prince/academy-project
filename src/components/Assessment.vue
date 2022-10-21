@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <firstdashboard/>
-
     <div class="assessment">
       <div class="assessment-and-timer">
         <div class="assessmentDiv">
@@ -19,8 +18,7 @@
         </div>
          <p>We have 4 days left until the next assessment<br>
             Watch this space</p>
-          <button> Start Assessment</button>
-            <router-link to="/questions"><button>Take Assessment</button></router-link>
+          <router-link to="/questions"><button>Start Assessment</button></router-link>
       </div>
     </div>
   </div>
@@ -47,11 +45,13 @@ export default {
   font-family: 'Lato', sans-serif;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 326px;
 }
 .assessment{
-  margin: 107px 0 86px 290px;
-  padding: 0 58px; 
+  margin: 90px 0 8px 292px;
+  width: 100%;
+  padding: 0 47px; 
 }
 .timer-icon{
   display: flex;
@@ -60,9 +60,9 @@ export default {
   
 }
 .assessmentDiv{
-  padding-top: 107px;
+  /* padding-top: 107px;
   padding-right: 82px;
-  width: 100%;
+  width: 100%; */
 } 
 .assessmentDiv h1{
 font-style: normal;
@@ -130,5 +130,6 @@ color: #4F4F4F;
   border-radius: 4px;
   border: none;
   color: #fff;
+  cursor: pointer;
 }
 </style>

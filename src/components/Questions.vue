@@ -10,15 +10,9 @@ import firstdashboard from '.';
         </div>
         <div class="timer-icon">
             <p>Timer</p>
-        <p>00<span>min</span>010<span>sec</span></p>
+            <p>00<span>min</span>010<span>sec</span></p>
       </div>
       </div>
-      <div class="questions">
-          <div class="question-1">
-          <p>Question 1</p>
-          <h2>What is the purpose of HDR technology?</h2>
-          </div>
-        </div>
         <div class="questions">
             <div class="question-1">
               <p>Question 1</p>
@@ -48,7 +42,7 @@ import firstdashboard from '.';
                 <button class="previous">Previous</button>
                 <button class="next">Next</button>
             </div>
-            <router-link to="/successful">
+            <router-link to="/final">
                 <button class="finish">Finish</button>
             </router-link>
           </div>
@@ -103,21 +97,13 @@ export default {
 }
 .assessment-and-timer{
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 326px;
+  align-items: baseline;
 }
 .assessment{
-margin: 90px 0 8px 292px;
-width: 100%;
-padding: 0 47px;
-width: 100%;
-}
-.assessment-and-timer{
-display: flex;
-justify-content: space-between;
-margin-left: 47px;
-margin-bottom: 64px;
+  margin: 90px 0 8px 292px;
+  width: 100%;
+  padding: 0 47px;
 }
 .assessmentDiv {
 align-items: center;
@@ -155,6 +141,7 @@ color: #2B3C4E;
   font-size: 48px;
   line-height: 58px;
   color: #2B3C4E;    
+  margin-top: -17px;
 }
 .timer-icon p:nth-of-type(2) span{
   font-family: 'Lato';
@@ -167,11 +154,8 @@ color: #2B3C4E;
 .questions{
   margin-top: 64px;
   display: flex;
-    flex-direction: column;
-    width: 406px;
-    height: 299px;
-    margin-left: 47px;
-    margin-bottom:206px;
+  flex-direction: column;
+  margin-left: 10px;
 }
 .questions p{
   font-family: 'Lato';
@@ -205,17 +189,21 @@ color: #2B3C4E;
   gap: 10px;
   margin-top: 37px;
   color: #2B3C4E;
-  align-items: center;
 }
 .buttons-icon{
   display:flex;
   flex-direction:column;
+  justify-content: center;
   align-items:center;
   margin-top:80px;
 }
 .buttons{
-  margin-bottom: 80px;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  margin-bottom:80px;
 }
+
 .previous{
   border: 1px solid #00000040;
   width: 125px;
@@ -239,78 +227,6 @@ color: #2B3C4E;
   border: none;
   border-radius: 4px;
   margin-bottom:206px;
-}
-
-.questions h2{
-font-style: italic;
-font-weight: 500;
-font-size: 24px;
-line-height: 29px;
-color: #2B3C4E;
-margin-top: 14px;  
-display:inline-block;
-width: 406px;
-height: 29px;
-margin-bottom:48px;
-}
-input{
-    width: 8px;
-    height: 8px;
-    margin-right:42px;
-    border: 1px solid #2B3C4E;
-    margin-bottom: 37px;
-}
-label{
-    font-style: italic;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    width: 252px;
-    height: 20px;
-    color: #2B3C4E;
-}
-.active{
-width: 355.08px;
-height: 33px;
-background: #31D283;
-}
-.buttons-icon{
-display:flex;
-flex-direction:column;
-margin-left:193px;
-margin-bottom: 80px;
-margin-top:80px;
-justify-content:center;
-align-items: center;
-}
-.buttons{
-display:flex;
-flex-direction:row;
-align-items:center;
-margin-bottom:80px;
-}
-.previous{
-border: 1px solid #00000040;
-width: 125px;
-height: 41px;
-margin-right:220px;
-color:#211F26;
-}
-.next{
-width: 125px;
-height: 41px;
-background-color:#7557D3;
-color:white;
-border-radius:4px;
-border:none;
-}
-.finish{
-width: 205px;
-height: 41px;
-background-color: #CECECE;
-color: white;
-border: none;
-border-radius: 4px;
-margin-bottom:206px;
+  cursor: pointer;
 }
 </style>

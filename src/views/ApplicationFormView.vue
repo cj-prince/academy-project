@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="submitDiv">
-            <router-link  to="/"><button class="submit">Submit</button></router-link>
+            <router-link  to="/dashboard"><button class="submit">Submit</button></router-link>
         </div>
         
       </form>
