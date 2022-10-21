@@ -1,7 +1,7 @@
-import firstdashboard from '@/components/firstdashboard.vue';
 <template>
   <div class="container">
     <firstdashboard/>
+
     <div class="assessment">
       <div class="assessment-and-timer">
         <div class="assessmentDiv">
@@ -20,6 +20,7 @@ import firstdashboard from '@/components/firstdashboard.vue';
          <p>We have 4 days left until the next assessment<br>
             Watch this space</p>
           <button> Start Assessment</button>
+            <router-link to="/questions"><button>Take Assessment</button></router-link>
       </div>
     </div>
   </div>
@@ -43,23 +44,34 @@ export default {
   display: flex;
 }
 .assessment-and-timer{
+  font-family: 'Lato', sans-serif;
   display: flex;
   justify-content: space-between;
   gap: 326px;
-  
 }
 .assessment{
   margin: 107px 0 86px 290px;
   padding: 0 58px; 
+}
+.timer-icon{
+  display: flex;
+  justify-content: space-between;
+  margin:left;
+  
+}
+.assessmentDiv{
+  padding-top: 107px;
+  padding-right: 82px;
+  width: 100%;
 } 
 .assessmentDiv h1{
-  font-family: 'Lato';
 font-style: normal;
 font-weight: 300;
-font-size: 43px;
+font-size: 43.5555px;
 line-height: 52px;
 letter-spacing: -0.02em;
 color: #2B3C4E;
+margin-bottom:14px;
 }
 .assessmentDiv p{
   margin-top: 14px;
@@ -70,7 +82,6 @@ color: #2B3C4E;
   line-height: 19px;
   color: #2B3C4E;
 }
-
 .timer-icon p:first-child{
   font-family: 'Lato';
 font-style: normal;
@@ -97,6 +108,7 @@ color: #4F4F4F;
 }
 .center-icon{
   margin-top: 164px;
+  height:100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
