@@ -7,10 +7,7 @@
         <p> Join enyata academy today and bring your long <br> awaiting dream to reality.</p>
     <router-link to="/signup"><input type="submit" value="Register"/></router-link>  
       </div>
-      <div class="dashImg">
-        <img src="../assets/dashboard/dashboardimg.png" alt="">
-      </div>
-    </section>
+    </section> 
     <section class="dashBut" >
       <div class="dashButfirst" >
         <p></p>

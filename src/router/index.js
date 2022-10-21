@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView'
+import HomeView from '../views/HomeView.vue'
+import Assessment from '../components/Assessment.vue'
+
 
 const routes = [
   {
@@ -8,6 +10,11 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/assessment',
+    name: 'Assessment',
+    component: Assessment
+}
+{
     path: '/signup',
     name: 'signup',
    
@@ -30,6 +37,7 @@ const routes = [
     name: 'ApplicationFormView',
    
     component: () => import('../views/ApplicationFormView')
+
   }
 ]
 
