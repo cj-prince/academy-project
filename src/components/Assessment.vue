@@ -15,11 +15,11 @@ import firstdashboard from '@/components/firstdashboard.vue';
       </div>
       <div class="center-icon">
         <div class="icon">
-              <img src="../assets/dashboardone/hourglass.png" alt="">
+            <img src="../assets/dashboardone/hourglass.png" alt="">      
         </div>
-        <p>We have 4 days left until the next assessment<br>
+         <p>We have 4 days left until the next assessment<br>
             Watch this space</p>
-        <ButtonComponent width="205" height="41"> Start Assessment</ButtonComponent>
+          <button> Start Assessment</button>
       </div>
     </div>
   </div>
@@ -41,16 +41,16 @@ export default {
 <style scoped>
 .container{
   display: flex;
-  gap: 47px;
 }
 .assessment-and-timer{
   display: flex;
   justify-content: space-between;
+  gap: 326px;
+  
 }
 .assessment{
-  padding-top: 107px;
-  padding-right: 82px;
-  width: 100%;
+  margin: 107px 0 86px 290px;
+  padding: 0 58px; 
 } 
 .assessmentDiv h1{
   font-family: 'Lato';
@@ -96,7 +96,7 @@ line-height: 14px;
 color: #4F4F4F;
 }
 .center-icon{
-  height: 80%;
+  margin-top: 164px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -111,5 +111,12 @@ line-height: 20px;
 text-align: center;
 margin-bottom: 24px;
 color: #4F4F4F;
+}
+.center-icon button{
+  padding: 10px 40px;
+  background: #12C52F;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
 }
 </style>

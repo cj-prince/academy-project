@@ -6,10 +6,16 @@
       <p class="email">doe@enyata.com</p>
       </div>
       <div class="buttons">
-            <router-link to="/dashboard"><button><img src="../assets/dashboardone/Group.png" alt="dashboard icon" class="nav-button-img">Dashboard</button></router-link>
-            <router-link to="/assessment"><button class="assessment-button"><img src="../assets/dashboardone/Vector2.png" alt="assessment icon" class="nav-button-img">Assessment</button></router-link>
-            <router-link to="/logout"><button><img src="../assets/dashboardone/Vector3.png" alt="logout icon" class="nav-button-img">Log Out</button></router-link>
+        <div class="sideBar-icons">
+          <router-link to="/dashboard"><img src="../assets/dashboardone/Group.png" alt="dashboard icon" class="nav-button-img"> <span>Dashboard</span> </router-link>
+          <router-link to="/assessment"><img src="../assets/dashboardone/Vector2.png"><span>Assessment</span> </router-link>
         </div>
+            
+        <div class="sideBar-log">
+          <router-link to="/"><img src="../assets/dashboardone/Vector3.png" alt="logout icon" class="nav-button-img"><span>Log Out</span> </router-link>
+        </div>
+            
+      </div>
   </div>
 </template>
 
@@ -24,17 +30,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
- @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-    *{
-    font-family: 'Lato', sans-serif;
-    font-size: 16px
-    }
+
 .firstdashboard{
+  font-family: 'Lato', sans-serif;
   width: 292px;
   box-shadow: 0px 5px 15px rgba(33, 31, 38, 0.05);
   height: 100vh;
   position: fixed
-  }
+}
 .first-container{
 background-color: #7557D3;
 padding: 57px 91px;
@@ -56,28 +59,30 @@ font-weight:400;
 .button-img{
 margin-right: 16.56px;
 }
-.button{
-height: 49px;
-display: block;
-background-color:#FFFFFF;
-color: #2B3C4E;
-outline: none;
-border:none;
-border-left: 4px solid #FFFFFF;
-padding-left: 30px;
-cursor: pointer;
-line-height: 19.2px;
-text-align: left;
-width: 100%;
-
+.buttons a{
+  display:flex;
+  align-items: center;
+  margin-inline: 38px;
+  gap: 21px;
+  background-color:#FFFFFF;
+  color: #2B3C4E;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
 }
-
 .buttons{
-display:flex;
-flex-direction: column;
-margin: 28px 0 57px;
+  display:flex;
+  flex-direction: column;
+  margin: 28px 0 57px;
 }
 
+.sideBar-log{
+  margin-top: 57px;
+}
+
+a{
+  text-decoration: none;
+}
 button:active, button:focus{
 border-left: 4px solid #7557D3;
 font-weight: 700;
@@ -91,4 +96,9 @@ text-decoration: none;
 .logout-button{
  margin: 15px 0 57px
 }
+
+a{
+  text-decoration: none;
+}
+
 </style>

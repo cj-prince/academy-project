@@ -1,5 +1,7 @@
+import firstdashboard from '.';
 <template>
   <div class="first-container">
+      <firstdashboard />
   <div class="wrapper">
     <h1>Dashboard</h1>
     <p class="first-line">Your Application is currently being review, you wil be notified if successful</p>
@@ -37,21 +39,19 @@
 </template>
 
 <script>
+import firstdashboard from './firstdashboard.vue'
   export default {
   name: 'DashBoard',
   components: {
+      firstdashboard 
   }
   }
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-* {
-      font-family: "Lato", sans-serif;
-      color: #2B3C4E;
-}
 .first-container{
-display: flex
+    display: flex;
+    font-family:"Lato", sans-serif ;   
  }
 .wrapper{
 margin: 107px 0 86px 290px;
