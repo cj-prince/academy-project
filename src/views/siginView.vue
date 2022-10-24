@@ -5,14 +5,14 @@
         <img src="../assets/dashboard/logo.png" alt="logo">
         <p class="title">Log In</p>
       </div>
-      <form action="" @submit.prevent= "handleSubmit">
+      <form action="" @submit.prevent= "handleSubmit()">
         <span v-if="errorField">enter field</span>
         <label for="lname">Email Address</label><br />
         <input type="email" id="email" name="email" v-model="user.email"/><br />
         <label for="password">Password</label><br />
         <span v-if="passwordCheck">Password incorrect</span>
         <input type="password" id="password" name="password" v-model="user.password"/><br />
-        <router-link to="/applicationform"><button class="signin">Sign In</button></router-link>
+        <button class="signin">Sign In</button>
       </form>
       <div class="footer">
         <p>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 export default {
   name: "ForgotPdView",
   data: () =>({
@@ -36,25 +36,25 @@ export default {
     passwordCheck: false
   }),
   methods:{
-    // async  handleSubmit() {
-    //   if(!this.user.email||!this.user.password){
-    //     return this.errorField = true
-    //   }
-    //   if(this.user.password.length < 8){
-    //     this.passwordCheck = true
-    //   }
-    //   try {
-    //     const response = await axios.post('http://localhost:5000/students/login', {
-    //       email: this.email,
-    //       password: this.password,
-    //     });
-    //     console.log(response)
-    //     sessionStorage.setItem("session", JSON.stringify(response.token));
-    //      this.$router.push('/ApplicationFormView')
-    //   } catch (error) {
-    //     console.log(error)
-    //   }  
-    // }
+    async  handleSubmit() {
+      if(!this.user.email||!this.user.password){
+        return this.errorField = true
+      }
+      if(this.user.password.length < 8){
+        this.passwordCheck = true
+      }
+      try {
+        const response = await axios.post('http://localhost:5000/students/login', {
+          email: this.user.email,
+          password: this.user.password,
+        });
+        console.log(response)
+        sessionStorage.setItem("session", JSON.stringify(response.data.data));
+        this.$router.push('/applicationform')
+      } catch (error) {
+        console.log(error)
+      }  
+    }
   }
 };
 </script>

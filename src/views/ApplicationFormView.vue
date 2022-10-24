@@ -5,7 +5,7 @@
         <img src="../assets/dashboard/logo.png" alt="" />
         <p class="title">Application Form</p>
       </div>
-      <form class="form-container">
+      <form class="form-container" method="PUT" @submit.prevent="handleSubmit()">
         <div class="uploads">
           <button class="upload-buttons">
             <img src="../assets/Icons/Group.svg" alt="upload-icon" class="upload-img" />
@@ -16,30 +16,30 @@
             Upload Photo
           </button>
         </div>
-        <div class="form-sub-container">
+        <div class="form-sub-container" >
           <div class="form-right">
             <label for="fname">First Name</label><br />
-            <input type="text" id="fname" name="fname" /><br />
-            <label for="lname">Email</label><br />
-            <input type="email" id="email" name="email" /><br />
+            <input type="text" id="fname" name="fname" v-model="user.firstname" /><br />
+            <label for="email">Email</label><br />
+            <input type="email" id="email" name="email" v-model="user.email" /><br />
             <label for="address">Address</label><br />
-            <input type="text" id="address" name="address" /><br />
+            <input type="text" id="address" name="address" v-model="user.address"/><br />
             <label for="course">Course of Study</label><br />
-            <input type="text" id="course" name="course" /><br />
+            <input type="text" id="course" name="course" v-model="user.course_of_study" /><br />
           </div>
           <div class="form-left">
             <label for="lname">Last Name</label><br />
-            <input type="text" id="lname" name="lname" /><br />
+            <input type="text" id="lname" name="lname" v-model="user.lastname" /><br />
             <label for="dob">Date of Birth</label><br />
-            <input type="date" id="dob" name="dob" placeholder="dd/mm/yyyy" /><br />
+            <input type="text" id="dob" name="dob" v-model="user.dob" /><br />
             <label for="university">University</label><br />
-            <input type="text" id="university" name="university" /><br />
+            <input type="text" id="university" name="university" v-model="user.university" /><br />
             <label for="cgpa">CGPA</label><br />
-            <input type="text" id="cgpa" name="cgpa" /><br />
+            <input type="text" id="cgpa" name="cgpa" v-model="user.cgpa" /><br />
           </div>
         </div>
         <div class="submitDiv">
-            <router-link  to="/dashboard"><button class="submit">Submit</button></router-link>
+          <button class="submit">Submit</button>
         </div>
         
       </form>
@@ -48,8 +48,44 @@
 </template>
   
 <script>
+import axios from 'axios'
 export default {
   name: "ApplicationFormView",
+  data:()=> ({
+    user:{email:"",firstname:"",lastname:'',
+    course_of_study:'',address:'',university:"",dob:'',cgpa: 0,id:''},
+  }),
+  methods:{
+    async  handleSubmit() {
+    try {
+      // let newData = new newData();
+      // newData.append("firstname", this.firstname);
+      // newData.append("lastname", this.lastname);
+      // newData.append("cgpa", this.cgpa);
+      // newData.append("dob", this.dob);
+      // newData.append("address", this.address);
+      // newData.append("course_of_study", this.course_of_study);
+      // newData.append("university", this.university);
+      await axios.put(`http://localhost:5000/students/${this.user.id}`, {
+        course_of_study: this.user.course_of_study,
+        address: this.user.address,
+        university: this.user.university,
+        dob: this.user.dob,
+        cgpa: this.user.cgpa,
+        email: this.user.email,
+      });
+      this.$router.push('/dashboard')
+    } catch (error) {
+      console.log(error)
+    }  
+  }
+  },
+  mounted(){
+    const session = sessionStorage.getItem('session')
+     console.log(session)
+     const parsedSession = JSON.parse(session)
+     this.user = parsedSession.student
+  }
 };
 </script>
   
