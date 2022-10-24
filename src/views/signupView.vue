@@ -6,7 +6,7 @@
         <p class="title">Sign Up</p>
       </div>
       <form class="form-wrapper" @submit.prevent= "handleSubmit" >
-         <span v-if="errorField">Please enter all fields</span>
+         <span class="errorField" v-if="errorField">Please enter all fields</span>
         <div class="form-container">
           <div class="first-form">
             <label for="fname">First Name</label><br />
@@ -17,7 +17,7 @@
             <input type="email" id="email"
             name="email" v-model="email" required/><br />
             <label for="password">Password</label><br />
-            <span v-if="passwordCheck">Password must be more then 8 characters</span>
+            <span class="passwordCheck" v-if="passwordCheck">Password must be 8 characters long</span>
             <input type="password" id="password" 
             name="password" v-model="password" required/><br />
           </div>
@@ -28,7 +28,7 @@
             <input type="tel" id="tel" 
             name="tel" v-model="phone_number" required/><br />
             <label for="confirm-password">Confirm Password</label><br />
-            <span v-if='passwordInvalid'>Password don't match</span>
+            <span class="passwordInvalid" v-if='passwordInvalid'>Password don't match</span>
             <input
               type="password"
               id="cpassword"
@@ -66,7 +66,7 @@ export default {
       if(!this.first_name || !this.last_name || !this.email || !this.phone_number ||!this.password ||!this.password_confirm){
         return this.errorField = true
       }
-      if(this.password === this.password_confirm){
+      if(this.password !== this.password_confirm){
         this.passwordInvalid = true
       }
       if(this.password.length < 8){
@@ -87,6 +87,7 @@ export default {
       }
     
       
+      
     }
   }
 }
@@ -94,7 +95,6 @@ export default {
 </script>
 
 <style scoped>
-
 .container {
   font-family: "Lato", sans-serif;
   background: white;
@@ -167,6 +167,7 @@ input {
   margin-bottom: 10px;
   font-weight: 600;
   font-size: 16px;
+  
 }
 .sign-in {
   font-weight: 500;
@@ -175,9 +176,27 @@ input {
   color: #4f4f4f;
   text-align: center;
   font-style: italic;
+  
 }
 a {
   text-decoration-line: underline;
   color: #1a2c56;
+}
+
+.errorFiled{
+  color: red;
+  font-size: 10px;
+}
+
+.passwordCheck{
+color: red;
+margin-top:4px;
+  font-size: 10px;
+}
+
+.passwordInvalid{
+ color: red;
+ margin-top: auto;
+  font-size: 10px;
 }
 </style>

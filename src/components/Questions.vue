@@ -2,17 +2,14 @@ import firstdashboard from '.';
 <template>
   <div class="container">
     <firstdashboard/>
+  </div>
     <div class="assessment">
       <div class="assessment-and-timer">
         <div class="assessmentDiv">
           <h1>Take Assessment</h1>
           <p>Click the button below to start assessment, you have limited time for this test</p>
         </div>
-        <div class="timer-icon">
-            <p>Timer</p>
-            <p>00<span>min</span>010<span>sec</span></p>
-      </div>
-      </div>
+        <CountDownTimer/>
         <div class="questions">
             <div class="question-1">
               <p>Question 1</p>
@@ -54,16 +51,19 @@ import firstdashboard from '.';
 
 <script>
 import firstdashboard from './firstdashboard.vue'
+import CountDownTimer from './CountDownTimer.vue'
 export default {
   name: 'Questions-',
   components:{
     firstdashboard,
+    CountDownTimer,
   },
-  data:() => ({
-  isActive:false
-  })
-  ,
 }
+  
+  
+  
+  
+  
 </script>
 
 
@@ -126,6 +126,7 @@ font-size: 16px;
 line-height: 19px;
 color: #2B3C4E;
 }
+
 .timer-icon p:first-child{
   font-family: 'Lato';
   font-style: normal;

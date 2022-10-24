@@ -3,15 +3,17 @@
     <div class="header">
       <div class="logo-con">
         <img src="../assets/dashboard/logo.png" alt="" />
-        <p class="title">Application Form</p>
+        <p class="title" >Application Form</p>
       </div>
-      <form class="form-container">
+      <form class="form-container" @submit.prevent= "handleSubmit" >
+           <span class="errorField" v-if="errorField">Please enter all fields</span>
         <div class="uploads">
-          <button class="upload-buttons">
-            <img src="../assets/Icons/Group.svg" alt="upload-icon" class="upload-img" />
-            Upload CV
-          </button>
-          <button class="upload-buttons">
+        <button class="upload-buttons" @Click="onUpload">
+  <img src="../assets/Icons/Group.svg" alt="upload-icon" class="upload-img" />
+  Upload CV
+</button>
+
+      <button class="upload-buttons">
             <img src="../assets/Icons/Group.svg" alt="upload-icon" class="upload-img" />
             Upload Photo
           </button>
@@ -19,27 +21,33 @@
         <div class="form-sub-container">
           <div class="form-right">
             <label for="fname">First Name</label><br />
-            <input type="text" id="fname" name="fname" /><br />
+            <input type="text" id="fname" name="fname" v-model="first_name" required/><br />
             <label for="lname">Email</label><br />
-            <input type="email" id="email" name="email" /><br />
+            <input type="email" id="email" name="email" v-model="email" required/><br />
             <label for="address">Address</label><br />
-            <input type="text" id="address" name="address" /><br />
+            <input type="text" id="address" name="address" v-model="Address"
+            required/> <br />
             <label for="course">Course of Study</label><br />
-            <input type="text" id="course" name="course" /><br />
+            <input type="text" id="course" name="course" v-model="course" required/><br />
           </div>
           <div class="form-left">
             <label for="lname">Last Name</label><br />
-            <input type="text" id="lname" name="lname" /><br />
+            <input type="text" id="lname" name="lname" v-model="last_name"
+            required/><br />
             <label for="dob">Date of Birth</label><br />
-            <input type="date" id="dob" name="dob" placeholder="dd/mm/yyyy" /><br />
+            <input type="date" id="dob" name="dob" placeholder="dd/mm/yyyy"
+            v-model="dob" 
+            required/><br />
             <label for="university">University</label><br />
-            <input type="text" id="university" name="university" /><br />
+            <input type="text" id="university" name="university" v-model="university" required/><br />
             <label for="cgpa">CGPA</label><br />
-            <input type="text" id="cgpa" name="cgpa" /><br />
+            <input type="text" id="cgpa" name ="cgpa" v-model="Cgpa"  required/><br />
           </div>
         </div>
         <div class="submitDiv">
-            <router-link  to="/dashboard"><button class="submit">Submit</button></router-link>
+             <router-link  to="/dashboard">
+    <button class="submit">Submit</button>
+         </router-link> 
         </div>
         
       </form>
@@ -48,15 +56,54 @@
 </template>
   
 <script>
+ import axios from 'axios'
 export default {
   name: "ApplicationFormView",
-};
+  data: () =>({
+    first_name:'',
+    last_name:'',
+    email:'',
+    Address:'',
+    course:'',
+    dob:'',
+    university:'',
+    Cgpa:'',
+    selectedFile: null
+  }),
+  methods:{
+    async  handleSubmit() {
+      if(!this.first_name || !this.last_name || !this.email || !this.Address || !this.course ||!this.dob || !this.university || !this.Cgpa) {
+        return this.errorField = true
+      }
+      
+      try {
+        const response = await axios.post('http://localhost:5000/students:id', {
+          firstname: this.first_name,
+          lastname: this.last_name,
+          email: this.email,
+          Address: this.Address,
+          course: this.course,
+          dob: this.dob,
+          university: this.university,
+          Cgpa: this.Cgpa,
+        });
+        sessionStorage.setItem("session", JSON.stringify(response.token));
+         this.$router.push('/ApplicationForm')
+      } catch (error) {
+        console.log(error)
+      }
+    
+      
+    }
+  }
+}
+
+
 </script>
   
 <style scope>
 .container {
   font-family: "Lato", sans-serif;
-  background-position: right -23.82% top -84.06%;
   padding-top: 100px;
   padding-bottom: 100px;
 }
@@ -143,7 +190,7 @@ a {
   color: #1a2c56;
 }
 
-.upload-buttons {
+ .upload-buttons {
   padding: 14px 53px;
   background-color: white;
   border: 1.5px dashed #2b3c4e;
@@ -152,7 +199,7 @@ a {
   color: #2b3c4e;
   font-weight: 400;
   font-size: 16px;
-}
+} 
 
 button:hover {
   cursor: pointer;

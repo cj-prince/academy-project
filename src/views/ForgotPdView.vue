@@ -124,9 +124,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
-/* .check-icon {
-  display: none;
-} */
+
 .send-link {
   width: 380px;
   height: 50px;

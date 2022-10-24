@@ -19,7 +19,7 @@
           Don’t have an account yet?
           <router-link to="/signup">Sign Up</router-link>
         </p>
-        <router-link to="/ForgotPdView"
+        <router-link to="/ForgotPd"
           >Forgot Password?</router-link>
       </div>
     </div>
@@ -29,7 +29,7 @@
 <script>
 // import axios from 'axios'
 export default {
-  name: "ForgotPdView",
+  name: "siginView",
   data: () =>({
     user:{email:"",password:""},
     errorField: false,
