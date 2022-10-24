@@ -66,7 +66,7 @@ export default {
       if(!this.first_name || !this.last_name || !this.email || !this.phone_number ||!this.password ||!this.password_confirm){
         return this.errorField = true
       }
-      if(this.password === this.password_confirm){
+      if(this.password !== this.password_confirm){
         this.passwordInvalid = true
       }
       if(this.password.length < 8){

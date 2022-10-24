@@ -19,7 +19,7 @@
           Don’t have an account yet?
           <router-link to="/signup">Sign Up</router-link>
         </p>
-        <router-link to="/ForgotPdView"
+        <router-link to="/passwordreset"
           >Forgot Password?</router-link>
       </div>
     </div>

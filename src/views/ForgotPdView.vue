@@ -35,7 +35,7 @@
 
 <script>
 export default {
-   name: "ForgotPdView",
+  name: "ForgotPdView",
 };
 </script>
 
@@ -81,6 +81,7 @@ export default {
   align-items: center;
   gap: 28px;
   cursor: pointer;
+  padding: 8px;
 }
 .icon {
   width: 48px;
@@ -129,13 +130,13 @@ export default {
 } */
 .send-link {
   width: 380px;
-  height: 50px;
   background: #7557d3;
   color: white;
   border: none;
   border-radius: 4px;
-  margin-top: 12px;
-  margin-bottom: 28px;
+  /* margin-top: 12px;
+  margin-bottom: 28px; */
+  padding-block: 16px;
   cursor: pointer;
 }
 .Resend {

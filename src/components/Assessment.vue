@@ -54,16 +54,9 @@ export default {
   padding: 0 47px; 
 }
 .timer-icon{
-  display: flex;
-  justify-content: space-between;
-  margin:left;
+  
   
 }
-.assessmentDiv{
-  /* padding-top: 107px;
-  padding-right: 82px;
-  width: 100%; */
-} 
 .assessmentDiv h1{
 font-style: normal;
 font-weight: 300;
@@ -96,7 +89,8 @@ font-style: normal;
 font-weight: 300;
 font-size: 48px;
 line-height: 58px;
-color: #2B3C4E;    
+color: #2B3C4E;   
+margin-top: -5px; 
 }
 .timer-icon p:nth-of-type(2) span{
   font-family: 'Lato';
