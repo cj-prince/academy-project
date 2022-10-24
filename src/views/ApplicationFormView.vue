@@ -35,7 +35,7 @@
             <label for="university">University</label><br />
             <input type="text" id="university" name="university" v-model="user.university" /><br />
             <label for="cgpa">CGPA</label><br />
-            <input type="text" id="cgpa" name="cgpa" v-model="user.cgpa" /><br />
+            <input type="text" id="cgpa" name="cgpa" v-model= user.cgpa /><br />
           </div>
         </div>
         <div class="submitDiv">
