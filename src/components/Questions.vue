@@ -10,40 +10,40 @@ import firstdashboard from '.';
         </div>
         <div class="timer-icon">
             <p>Timer</p>
-            <p>00<span>min</span>010<span>sec</span></p>
+            <p>0{{mins}}<span>min</span>0{{secs}}<span>sec</span></p>
       </div>
       </div>
         <div class="questions">
             <div class="question-1">
-              <p>Question 1</p>
-            <h2>What is the purpose of HDR technology?</h2>
+              <p>Question {{currentQuestion+1}}</p>
+            <h2>{{questions[currentQuestion]?.question}}</h2>
             </div>
             <div class="navigate">
               <div class="options">
-                <input type="radio" value="A"/>
-                <label for="A">A. To reduce the file size of images and videos.</label><br>
+                <input type="radio" value="A" v-model="userAnswers[currentQuestion]"/>
+                <label for="questions[currentQuestion].a_option">A. {{questions[currentQuestion]?.a_option}}</label><br>
               </div>
               <div class="options">
-                <input type="radio" value="B" />
-                <label for="B">B. To speed up 3D rendering performance.</label><br>
+                <input type="radio" value="B"  v-model="userAnswers[currentQuestion]" />
+                <label for="this.questions[currentQuestion].b_option">B. {{questions[currentQuestion]?.b_option}}</label><br>
               </div>
               <div class="options">
-                <input type="radio" value="C" />
-                <label for="C">C. To support higher video resolutions.</label><br>
+                <input type="radio" value="C" v-model="userAnswers[currentQuestion]" />
+                <label for="this.questions[currentQuestion].c_option">C. {{questions[currentQuestion]?.c_option}}</label><br>
               </div>
               <div class="options">
-                <input type="radio" value="D" />
-                <label for="D">D. To display more colors in images and videos</label>
+                <input type="radio" value="D" v-model="userAnswers[currentQuestion]" />
+                <label for="this.questions[currentQuestion].d_option">D. {{questions[currentQuestion]?.d_option}}</label>
               </div>
               
           </div>
           <div class="buttons-icon">
             <div class="buttons">
-                <button class="previous">Previous</button>
-                <button class="next">Next</button>
+                <button class="previous" @click="preQuest">Previous</button>
+                <button @click="nextQuest" :class="btnNextQuest()">Next</button>
             </div>
             <router-link to="/final">
-                <button class="finish">Finish</button>
+                <button :disabled="!isDisabled()" @click="submit" :class="btnBg()">Finish</button>
             </router-link>
           </div>
           
@@ -54,15 +54,104 @@ import firstdashboard from '.';
 
 <script>
 import firstdashboard from './firstdashboard.vue'
+import axios from 'axios'
 export default {
   name: 'Questions-',
   components:{
     firstdashboard,
   },
   data:() => ({
-  isActive:false
-  })
-  ,
+    isActive:false,
+    mins: 30,
+    secs: 0,
+    currentQuestion: 0,
+    selectedAnswers:{},
+    showScore: false,
+    score:0,
+    btn: "finish",
+    btnFinish: "btn-finish",
+    btnNext: "next",
+    noNext: "second-btn-drop",
+    countDown : 30,
+    timer:null,
+    startQuiz: false,
+    userAnswers: new Array().fill(""),
+    questions:[],
+  }),
+  methods:{
+    btnBg(){
+      if(this.currentQuestion === 30){
+      return this.btnFinish
+      } 
+        return this.btn
+    },
+    btnNextQuest(){
+      if(this.currentQuestion === 30){
+        return this.noNext
+        } 
+      return this.btnNext
+    },
+    startTimer(duration) {
+      let timer = duration
+      setInterval(() => {
+          this.mins = parseInt(timer / 60, 10);
+          this.secs = parseInt(timer % 60, 10);
+          this.mins = this.mins < 10 ? "0" + this.mins : this.mins;
+          this.secs = this.secs < 10 ? "0" + this.secs : this.secs;
+          if (--timer < 0) {
+              timer = duration;
+          }
+      }, 1000);
+    },
+    nextQuest(){
+      if(this.currentQuestion === this.questions.length - 1) return 
+        this.currentQuestion += 1
+    },
+    preQuest(){
+      if(this.currentQuestion === 0) return 
+        this.currentQuestion -= 1
+    },
+    submit(){
+        this.$router.push('/final');
+        // const timeFinish = {mins:this.mins, secs:this.secs} 
+        // this.$store.commit("setTimeFinish", timeFinish)
+    },
+    isDisabled(){
+      if(this.currentQuestion === 9) return true
+    },
+    async  handleQuestions() {
+      try {
+        const response = await axios.get('http://localhost:5000/accessment');
+        console.log(response)
+        this.questions = response.data.data
+        console.log('questions',this.questions)
+      } catch (error) {
+        console.log(error)
+      }
+    
+    }
+  },
+   created(){
+    
+  },
+  mounted() {
+   this.handleQuestions()
+    const thirtyMins = 60 * 30
+    this.startTimer(thirtyMins)
+  },
+  watch:{
+    userAnswers:{
+      handler(userAnswers){
+        console.log('answer',userAnswers)
+      },
+      deep:true
+    },
+    secs(secs){
+      if(Number(secs)===0 && Number(this.mins)===0){
+        this.submit()
+      }
+    }
+  }
 }
 </script>
 
@@ -210,6 +299,8 @@ color: #2B3C4E;
   height: 41px;
   margin-right:220px;
   color:#211F26;
+  background: transparent;
+  cursor: pointer;
 }
 .next{
   width: 125px;
@@ -218,6 +309,7 @@ color: #2B3C4E;
   color:white;
   border-radius:4px;
   border:none;
+  cursor: pointer;
 }
 .finish{
   width: 205px;
@@ -227,6 +319,35 @@ color: #2B3C4E;
   border: none;
   border-radius: 4px;
   margin-bottom:206px;
+  cursor: no-drop;
+}
+
+.btn-finish {
+  border: none;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background: #7557D3;
+  border-radius: 4px;
+  width: 205px;
+  height: 41px;
+  margin-top: 130px;
+  font-size: 16px;
+  line-height: 19px;
+  color: white;
   cursor: pointer;
+}
+
+.second-btn-drop {
+  background: #ffffff;
+  border-radius: 4px;
+  color: rgb(0, 0, 0);
+  width: 125px;
+  height: 41px;
+  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  border-radius: 4px;
+  cursor: no-drop;
+  margin: 50px 78px 30px 134px;
 }
 </style>

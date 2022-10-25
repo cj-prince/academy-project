@@ -5,7 +5,13 @@
         <h4>Ever had a Dream <br> of Becoming a Software <br>
         <span>Engineer?</span> </h4>
         <p> Join enyata academy today and bring your long <br> awaiting dream to reality.</p>
-    <router-link to="/signup"><input type="submit" value="Register"/></router-link>  
+         <p class="noRegister" v-if="show === false">
+          There is no application currently going on. Please check back again.
+        </p>
+        <router-link to="/signup" v-else><input type="submit" value="Register"/></router-link>  
+      </div>
+      <div class="dashImg">
+        <img src="../assets/dashboard/dashboardimg.png" alt="">
       </div>
     </section> 
     <section class="dashBut" >
@@ -36,16 +42,36 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'dashBoard',
   data: () => ({
-  
+    show: true,
   }),
   methods: {
-    gotoRegister(){
+   async gotoRegister(){
+      try {
+        const response = await axios.get('http://localhost:5000/batch');
+        console.log(response)
+        // let register = response.data.data
+        // console.log(register)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    mounted() {
+      console.log('here',this.gotoRegister)
+      // const showButton = localStorage.getItem("show");
+      //   if (showButton === null || showButton === false) {
+      //     this.show = false;
+      //   } else {
+      //     this.show = showButton;
+      //   }
+        
+      }
       
     }
-  }
 }
 </script>
 
@@ -135,6 +161,14 @@ export default {
 
 .colored{
   background: rgba(117, 87, 211, 0.1);
+}
+
+.noRegister {
+  color: #FF0000;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 20px;
 }
 
 

@@ -29,7 +29,7 @@ import firstdashboard from '.';
               <div class="assessment-details">
                   <p>We have 4 days left until the next assessment</p>
                   <p>Watch this space</p>
-                  <button>Take Assessment</button>
+                  <router-link to="/assessment"><button>Take Assessment</button></router-link>
               </div>
           </div>
       </div>
@@ -130,7 +130,7 @@ line-height: 20.07px;
 color: #4F4F4F;
 margin: 144px 0
  }
-.assessment-details>button{
+.assessment-details button{
 background-color: #B1B1B1;
 color: white;
 cursor: pointer;
@@ -140,5 +140,10 @@ padding: 10px 42px;
 border-radius: 4px;
 font-weight: 700;
 margin-top: 34px;
+}
+
+.assessment-details a{
+    outline: none;
+    border: none;
 }
 </style>
