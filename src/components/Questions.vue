@@ -80,7 +80,7 @@ export default {
   }),
   methods:{
     btnBg(){
-      if(this.currentQuestion === 30){
+      if(this.currentQuestion >= 1){
       return this.btnFinish
       } 
         return this.btn
@@ -117,7 +117,7 @@ export default {
         // this.$store.commit("setTimeFinish", timeFinish)
     },
     isDisabled(){
-      if(this.currentQuestion === 9) return true
+      if(this.currentQuestion >=1) return true
     },
     async  handleQuestions() {
       try {
