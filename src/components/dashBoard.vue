@@ -5,10 +5,14 @@
         <h4>Ever had a Dream <br> of Becoming a Software <br>
         <span>Engineer?</span> </h4>
         <p> Join enyata academy today and bring your long <br> awaiting dream to reality.</p>
-         <p class="noRegister" v-if="show === false">
-          There is no application currently going on. Please check back again.
-        </p>
-        <router-link to="/signup" v-else><input type="submit" value="Register"/></router-link>  
+        <router-link to="/signup"><input type="submit" value="Register"/></router-link> 
+        <div class="checkRegistration" v-if="show ===!show">
+          <img src="../assets/dashboard/esclim.png" alt="">
+          <p class="noRegister" style='color: rgba(255, 0, 0, 0.71)' >
+            Registration not open
+          </p>
+        </div> 
+         
       </div>
       <div class="dashImg">
         <img src="../assets/dashboard/dashboardimg.png" alt="">
@@ -46,32 +50,35 @@ import axios from 'axios'
 export default {
   name: 'dashBoard',
   data: () => ({
-    show: true,
+    show: false,
+    register: 0
   }),
   methods: {
    async gotoRegister(){
       try {
         const response = await axios.get('http://localhost:5000/batch');
         console.log(response)
-        // let register = response.data.data
-        // console.log(register)
+        this.register = response.data.data.length
+        console.log(this.register)
       } catch (error) {
         console.log(error)
       }
     },
 
     mounted() {
-      console.log('here',this.gotoRegister)
-      // const showButton = localStorage.getItem("show");
-      //   if (showButton === null || showButton === false) {
-      //     this.show = false;
-      //   } else {
-      //     this.show = showButton;
-      //   }
+      
+      
         
       }
       
+    },
+    created(){
+      this.gotoRegister()
+      if (this.register >0) {
+        this.show = !this.show;
+      } 
     }
+
 }
 </script>
 
@@ -164,13 +171,22 @@ export default {
 }
 
 .noRegister {
-  color: #FF0000;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
   margin-top: 20px;
+  color: red;
 }
 
+.checkRegistration{
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.checkRegistration img{
+  height: 20px;
+}
 
   @media (max-width: 720px){
     .dashImg img{

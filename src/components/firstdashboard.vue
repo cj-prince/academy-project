@@ -2,13 +2,19 @@
   <div class="firstdashboard">
     <div class="first-container">
       <div><img src="../assets/dashboardone/Ellipse.png" alt="ellipse"></div>
-      <p class="name">Jane Doe</p>
-      <p class="email">doe@enyata.com</p>
+      <p class="name">{{user.firstname + ' ' + user.lastname}}</p>
+      <p class="email">{{user.email}}</p>
       </div>
       <div class="buttons">
         <div class="sideBar-icons">
-          <router-link to="/dashboard"><img src="../assets/dashboardone/Group.png" alt="dashboard icon" class="nav-button-img"> <span>Dashboard</span> </router-link>
-          <router-link to="/assessment"><img src="../assets/dashboardone/Vector2.png"><span>Assessment</span> </router-link>
+          <div @click="activeBtn = 'btn1'" :class="{active: activeBtn === 'btn1' }">
+              <router-link to="/dashboard">
+            <img src="../assets/dashboardone/Group.png" alt="dashboard icon" class="nav-button-img"> <span>Dashboard</span> </router-link>
+          </div>
+          <div @click="activeBtn = 'btn2'" :class="{active: activeBtn === 'btn2' }">
+            <router-link to="/assessment"><img src="../assets/dashboardone/Vector2.png"><span>Assessment</span> </router-link>
+          </div>
+         
         </div>
             
         <div class="sideBar-log">
@@ -23,8 +29,14 @@
 export default {
   name: 'first-dashboard',
   data: () => ({
-  
+     activeBtn:'',
+     user:{email:"",firstname:"",lastname:'',}
   }),
+   mounted(){
+    const session = sessionStorage.getItem('session')
+     const parsedSession = JSON.parse(session)
+     this.user = parsedSession.student
+  }
 }
 </script>
 
@@ -83,10 +95,11 @@ margin-right: 16.56px;
 a{
   text-decoration: none;
 }
-button:active, button:focus{
-border-left: 4px solid #7557D3;
-font-weight: 700;
+.active{
+  border-left: 4px solid #7557D3;
+  font-weight: 700;
 }
+
 a{
 text-decoration: none;
 }

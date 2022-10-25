@@ -58,14 +58,6 @@ export default {
   methods:{
     async  handleSubmit() {
     try {
-      // let newData = new newData();
-      // newData.append("firstname", this.firstname);
-      // newData.append("lastname", this.lastname);
-      // newData.append("cgpa", this.cgpa);
-      // newData.append("dob", this.dob);
-      // newData.append("address", this.address);
-      // newData.append("course_of_study", this.course_of_study);
-      // newData.append("university", this.university);
       await axios.put(`http://localhost:5000/students/${this.user.id}`, {
         course_of_study: this.user.course_of_study,
         address: this.user.address,
