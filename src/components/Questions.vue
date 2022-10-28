@@ -111,38 +111,62 @@ export default {
       if(this.currentQuestion === 0) return 
         this.currentQuestion -= 1
     },
-    submit(){
-        this.$router.push('/final');
-        // const timeFinish = {mins:this.mins, secs:this.secs} 
-        // this.$store.commit("setTimeFinish", timeFinish)
-    },
-    isDisabled(){
-      if(this.currentQuestion >=1) return true
-    },
     async  handleQuestions() {
       try {
         const response = await axios.get('http://localhost:5000/accessment');
-        console.log(response)
+        // console.log(response)
         this.questions = response.data.data
         console.log('questions',this.questions)
       } catch (error) {
         console.log(error)
       }
     
-    }
-  },
-   created(){
+    },
+    async submit(){
+        // this.$router.push('/final');
+        
+        
+        try {
+          console.log('here',this)
+        const response = await axios.post('http://localhost:5000/answer',{
+          question_id: this.questions[this.currentQuestion].id,
+          student_answer: this.userAnswers[this.currentQuestion],
+          student_id: this.user.id
+        });
+
+       
+       console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    isDisabled(){
+      if(this.currentQuestion >=1) return true
+    },
     
   },
+   created(){
+    // console.log(this.submit())
+   
+  
+  },
   mounted() {
-   this.handleQuestions()
+   this.handleQuestions() 
+    // console.log('find', this.questions[0].id)
+
     const thirtyMins = 60 * 30
     this.startTimer(thirtyMins)
+
+    const session = sessionStorage.getItem('session')
+     const parsedSession = JSON.parse(session)
+     this.user = parsedSession.student
+     console.log(this.user)
   },
   watch:{
     userAnswers:{
-      handler(userAnswers){
+      handler(userAnswers,id){
         console.log('answer',userAnswers)
+        console.log("id", id)
       },
       deep:true
     },
@@ -330,7 +354,6 @@ color: #2B3C4E;
   border-radius: 4px;
   width: 205px;
   height: 41px;
-  margin-top: 130px;
   font-size: 16px;
   line-height: 19px;
   color: white;

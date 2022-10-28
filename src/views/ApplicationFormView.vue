@@ -5,16 +5,26 @@
         <img src="../assets/dashboard/logo.png" alt="" />
         <p class="title">Application Form</p>
       </div>
-      <form class="form-container" method="PUT" @submit.prevent="handleSubmit()">
+      <form class="form-container" enctype="multipart/form-data"  @submit.prevent="">
         <div class="uploads">
-          <button class="upload-buttons">
-            <img src="../assets/Icons/Group.svg" alt="upload-icon" class="upload-img" />
-            Upload CV
-          </button>
-          <button class="upload-buttons">
-            <img src="../assets/Icons/Group.svg" alt="upload-icon" class="upload-img" />
-            Upload Photo
-          </button>
+          <div class="uploads-image">
+            <button class="upload-buttons" @click="$refs.cv.click()">
+              <img src="../assets/Icons/Group.svg" alt="upload-icon" class="upload-img" />
+              Upload CV
+            </button>
+             <input id="file-upload"  name="cv" :v-model="user.cv" type="file" ref="cv" @change="handleCvUpload" style="display: none"/>
+             <span v-if="user.cv">name.doc</span>
+          </div>
+          <div class="uploads-image">
+            <button class="upload-buttons" @click="$refs.image.click()">
+              <img src="../assets/Icons/Group.svg" alt="upload-icon" class="upload-img" />
+              Upload Photo
+            </button>
+            <input
+            id="image-upload" name="image" :v-model="user.image" type="file" accept=".jpg, .jpeg, .png" ref="image" @change="handleImageUpload" style="display: none"/>
+            <span v-if="user.image">image/png</span>
+          </div>
+          
         </div>
         <div class="form-sub-container" >
           <div class="form-right">
@@ -39,7 +49,7 @@
           </div>
         </div>
         <div class="submitDiv">
-          <button class="submit">Submit</button>
+          <button class="submit" @click="handleSubmit()">Submit</button>
         </div>
         
       </form>
@@ -53,9 +63,47 @@ export default {
   name: "ApplicationFormView",
   data:()=> ({
     user:{email:"",firstname:"",lastname:'',
-    course_of_study:'',address:'',university:"",dob:'',cgpa: 0,id:''},
+    course_of_study:'',address:'',university:"",dob:'',cgpa: 0,cv: "",image: "",is_verified:false,id:''},
   }),
   methods:{
+    handleCvUpload(event) {
+      this.user.cv = event.target.files[0];
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        this.user.cv = reader.result
+      }
+      reader.readAsDataURL(this.user.cv);
+    },
+    handleImageUpload(event) {
+      this.user.image = event.target.files[0];
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        this.user.image = reader.result
+      }
+      reader.readAsDataURL(this.user.image);
+      reader.onload = (event) => {
+        let WIDTH = 800
+        let image_url = event.target.result;
+        let image = document.createElement('img');
+        image.src = image_url;
+
+        image.onload = (e) => {
+
+            let canvas = document.createElement('canvas');
+            let ratio = WIDTH / e.target.width;
+            canvas.width = WIDTH;
+            canvas.height = image.height * ratio;
+
+            let context = canvas.getContext('2d');
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+            let new_image_url = canvas.toDataURL('image/jpeg', 98)
+
+            let image_file = document.createElement('img')
+            image_file.src = new_image_url
+        } 
+      }
+    },
     async  handleSubmit() {
     try {
       await axios.put(`http://localhost:5000/students/${this.user.id}`, {
@@ -65,6 +113,8 @@ export default {
         dob: this.user.dob,
         cgpa: this.user.cgpa,
         email: this.user.email,
+        cv: this.user.cv,
+        image: this.user.image,
       });
       this.$router.push('/dashboard')
     } catch (error) {
@@ -73,10 +123,13 @@ export default {
   }
   },
   mounted(){
+    
     const session = sessionStorage.getItem('session')
      console.log(session)
+     
      const parsedSession = JSON.parse(session)
      this.user = parsedSession.student
+     console.log(this.user)
   }
 };
 </script>
@@ -182,6 +235,16 @@ a {
   font-size: 16px;
 }
 
+.uploads-image{
+  display: flex;
+  flex-direction: column;
+}
+
+.uploads-image span{
+  padding: 5px;
+  background: antiquewhite;
+  text-align: center;
+}
 button:hover {
   cursor: pointer;
 }
@@ -195,6 +258,7 @@ button:hover {
   justify-content: center;
   margin-top: 93.58px;
   margin-bottom: 32.03px;
+  gap: 32px;
 }
 
 .uploads>button:first-child {

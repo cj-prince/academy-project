@@ -6,12 +6,20 @@
         <p class="title">Log In</p>
       </div>
       <form action="" @submit.prevent= "handleSubmit()">
-        <span v-if="errorField">enter field</span>
-        <label for="lname">Email Address</label><br />
-        <input type="email" id="email" name="email" v-model="user.email"/><br />
-        <label for="password">Password</label><br />
-        <span v-if="passwordCheck">Password incorrect</span>
-        <input type="password" id="password" name="password" v-model="user.password"/><br />
+        <div>
+          <span v-if="errorField">enter field</span>
+          <label for="lname">Email Address</label><br />
+          <input type="email" id="email" name="email" v-model="user.email"/><br />
+        </div>
+        <div class="pass-word">
+          <label for="password">Password</label><br />
+          <span v-if="passwordCheck">Password incorrect</span>
+          <input :type="[passwordDisplay ? 'text' : 'password']" id="password" name="password" v-model="user.password"/><br />
+          <img @click="passwordDisplay = !passwordDisplay" src="../assets/dashboard/password.png" alt="">
+          
+        </div>
+        
+        
         <button class="signin">Sign In</button>
       </form>
       <div class="footer">
@@ -33,7 +41,8 @@ export default {
   data: () =>({
     user:{email:"",password:""},
     errorField: false,
-    passwordCheck: false
+    passwordCheck: false,
+    passwordDisplay: false,
   }),
   methods:{
     async  handleSubmit() {
@@ -134,5 +143,10 @@ a {
 }
 .forgot-password {
   text-decoration: none;
+}
+.pass-word img{
+  position: absolute;
+  top: 52%;
+  right: 37%;
 }
 </style>
