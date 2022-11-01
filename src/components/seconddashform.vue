@@ -15,8 +15,8 @@ import firstdashboard from '.';
           <div class="second-line">
               <p class="doa">Application Status</p>
               <p class="data">{{user.is_verified ===true? "APROVED":"PENDING"}}</p>
-              <hr v-if="user.is_verified === null" class="second-linehr">
-              <hr v-if="user.is_verified !== null" class="active">
+              <hr v-if="user.is_verified === false" class="second-linehr">
+              <hr v-if="user.is_verified !== false" class="active">
               <p class="comments">We will get back to you</p>
           </div>
       </div>
@@ -30,7 +30,7 @@ import firstdashboard from '.';
               <div class="assessment-details">
                   <p>We have 4 days left until the next assessment</p>
                   <p>Watch this space</p>
-                  <router-link to="/assessment"><button>Take Assessment</button></router-link>
+                  <button @click="takeAccessment()" :disabled="user.is_verified !== true">Take Assessment</button>
               </div>
           </div>
       </div>
@@ -49,13 +49,18 @@ import moment from 'moment';
   },
   data: () =>({
     user:{is_verified:false,created_at:""},
-    daysRemain:''
+    daysRemain:'',
+    
   }),
   methods:{
      getFormattedDate(date) {
          return moment(date).format("YYYY.MM.DD")
+    },
+    takeAccessment(){
+        if(this.user.is_verified === true){
+           this.$router.push("/assessment")
+        }
     }
-
   
   },
     mounted(){
@@ -175,16 +180,8 @@ padding: 25px 35px;
     margin-top: 34px;
 }
 
-.assessment-details.active{
+.active{
     background-color: #12C52F;;
-    color: white;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    padding: 10px 42px;
-    border-radius: 4px;
-    font-weight: 700;
-    margin-top: 34px;
 }
 
 .assessment-details a{

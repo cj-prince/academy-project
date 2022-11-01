@@ -39,7 +39,7 @@ import axios from 'axios'
 export default {
   name: "ForgotPdView",
   data: () =>({
-    user:{email:"",password:""},
+    user:{email:"",password:"",university:null},
     errorField: false,
     passwordCheck: false,
     passwordDisplay: false,
@@ -59,7 +59,15 @@ export default {
         });
         console.log(response)
         sessionStorage.setItem("session", JSON.stringify(response.data.data));
-        this.$router.push('/applicationform')
+        const session = sessionStorage.getItem('session')
+        const parsedSession = JSON.parse(session)
+        this.user = parsedSession.student
+        if(this.user !== null){
+          this.$router.push('/dashboard')
+        }else{
+          this.$router.push('/applicationform')
+        }
+        
       } catch (error) {
         console.log(error)
       }  
@@ -146,7 +154,7 @@ a {
 }
 .pass-word img{
   position: absolute;
-  top: 52%;
+  top: 45%;
   right: 37%;
 }
 </style>
