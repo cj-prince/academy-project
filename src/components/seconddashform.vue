@@ -14,7 +14,7 @@ import firstdashboard from '.';
           </div>
           <div class="second-line">
               <p class="doa">Application Status</p>
-              <p class="data">{{user.is_verified ===true? "APROVED":"PENDING"}}</p>
+              <p class="data">{{user.is_verified !== false? "APROVED":"PENDING"}}</p>
               <hr v-if="user.is_verified === false" class="second-linehr">
               <hr v-if="user.is_verified !== false" class="active">
               <p class="comments">We will get back to you</p>

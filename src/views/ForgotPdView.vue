@@ -2,7 +2,7 @@
   <div class="container">
     <p class="title">Forgot Password</p>
     <p class="option">Please select option to send link to reset password</p>
-    <div class="icons-container active">
+    <div class="icons-container active" @click="forgot">
       <div class="icon">
         <img src="../assets/Icons/Group9.svg" alt="">
       </div>
@@ -34,13 +34,21 @@
 </template>
 
 <script>
+
 export default {
   name: "ForgotPdView",
+  data:() => ({
+    
+  }),
+  methods:{
+    forgot(){
+      this.$router.push("/resetbyemail")
+    }
+  }
 };
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 .container {
   font-family: "Lato", sans-serif;
   width: 614px;

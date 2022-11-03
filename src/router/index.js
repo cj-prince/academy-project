@@ -28,6 +28,11 @@ const routes = [
     component: () => import('../views/ForgotPdView.vue')
   },
   {
+    path: '/resetbyemail',
+    name: 'resetPasswordEmail',
+    component: () => import('@/components/resetPasswordEmail.vue')
+  },
+  {
     path: '/applicationform',
     name: 'ApplicationFormView',
     component: () => import('../views/ApplicationFormView')

@@ -5,15 +5,14 @@
         <img src="../assets/dashboard/logo.png" alt="logo">
         <p class="title">Log In</p>
       </div>
+      <Error   :error='error'  v-if="error" />
       <form action="" @submit.prevent= "handleSubmit()">
         <div>
-          <span v-if="errorField">enter field</span>
           <label for="lname">Email Address</label><br />
           <input type="email" id="email" name="email" v-model="user.email"/><br />
         </div>
         <div class="pass-word">
           <label for="password">Password</label><br />
-          <span v-if="passwordCheck">Password incorrect</span>
           <input :type="[passwordDisplay ? 'text' : 'password']" id="password" name="password" v-model="user.password"/><br />
           <img @click="passwordDisplay = !passwordDisplay" src="../assets/dashboard/password.png" alt="">
           
@@ -36,21 +35,23 @@
 
 <script>
 import axios from 'axios'
+import Error from '@/components/error.vue'
 export default {
-  name: "ForgotPdView",
+  name: "signIn",
+  components:{Error},
   data: () =>({
     user:{email:"",password:"",university:null},
-    errorField: false,
     passwordCheck: false,
     passwordDisplay: false,
+    error: ''
   }),
   methods:{
     async  handleSubmit() {
       if(!this.user.email||!this.user.password){
-        return this.errorField = true
+        return this.error = 'Fields missing'
       }
       if(this.user.password.length < 8){
-        this.passwordCheck = true
+        this.error = 'Password must have 8 words'
       }
       try {
         const response = await axios.post('http://localhost:5000/students/login', {
@@ -62,7 +63,7 @@ export default {
         const session = sessionStorage.getItem('session')
         const parsedSession = JSON.parse(session)
         this.user = parsedSession.student
-        if(this.user !== null){
+        if(this.user.address !== null){
           this.$router.push('/dashboard')
         }else{
           this.$router.push('/applicationform')
@@ -119,6 +120,7 @@ input {
   border: 1.5px solid #bdbdbd;
   padding: 8px;
   border-radius: 4px;
+  /* margin-top: 10px */
 }
 .signin {
   width: 397px;
@@ -156,5 +158,10 @@ a {
   position: absolute;
   top: 45%;
   right: 37%;
+}
+span{
+  color: #4F8A10;
+	background-color: #DFF2BF;
+  padding: 4px;
 }
 </style>
