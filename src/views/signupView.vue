@@ -5,8 +5,8 @@
         <img src="../assets/dashboard/logo.png" alt="logo" />
         <p class="title">Sign Up</p>
       </div>
-      <form class="form-wrapper" @submit.prevent="handleSubmit">
-
+      <Error   :error='error'  v-if="error" />
+      <form class="form-wrapper" @submit.prevent= "handleSubmit" >
         <div class="form-container">
           <div class="first-form">
             <label for="fname">First Name</label><br />
@@ -120,9 +120,32 @@ export default {
     }
   },
 
-
-  methods: {
-    async handleSubmit() {
+import Error from '@/components/error.vue'
+export default {
+  name: "signupView",
+  components:{Error},
+  data: () =>({
+    first_name:'',
+    last_name:'',
+    email:'',
+    phone_number:'',
+    password:'',
+    password_confirm:'',
+    error: '',
+    passwordInvalid: false,
+    passwordCheck: false
+  }),
+  methods:{
+    async  handleSubmit() {
+      if(!this.first_name || !this.last_name || !this.email || !this.phone_number ||!this.password ||!this.password_confirm){
+        return this.error = "Fields cant be empty"
+      }
+      if(this.password !== this.password_confirm){
+        return this.error = "Password don't match"
+      }
+      if(this.password.length < 8){
+        return this.error = "Must be greater than 8 chacters"
+      }
       try {
         const response = await axios.post('http://localhost:5000/students', {
           firstname: this.first_name,

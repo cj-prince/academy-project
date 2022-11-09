@@ -14,7 +14,6 @@ const routes = [
   {
     path: '/signup',
     name: 'signup',
-   
     component: () => import('../views/signupView.vue')
   },
   {
@@ -26,6 +25,16 @@ const routes = [
     path: '/passwordreset',
     name: 'ForgotPdView',
     component: () => import('../views/ForgotPdView.vue')
+  },
+  {
+    path: '/resetbyemail',
+    name: 'resetPasswordEmail',
+    component: () => import('@/components/resetPasswordEmail.vue')
+  },
+  {
+    path: '/resetpassword/:id/:token',
+    name: 'ResetPassword',
+    component: () => import('@/views/ResetPassword.vue')
   },
   {
     path: '/applicationform',
@@ -52,6 +61,11 @@ const routes = [
     name: 'Final',
     component: Final
   },
+  {
+		path: '/:catchAll(.*)',
+		name: 'notFoundPage',
+		component: () => import('../views/notFoundPage')
+	}
 
 ]
 

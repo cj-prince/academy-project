@@ -13,6 +13,7 @@ import firstdashboard from '.';
             <p>0{{mins}}<span>min</span>0{{secs}}<span>sec</span></p>
       </div>
       </div>
+      <!-- <loadingState v-if="loading"/> -->
         <div class="questions">
             <div class="question-1">
               <p>Question {{currentQuestion+1}}</p>
@@ -20,20 +21,20 @@ import firstdashboard from '.';
             </div>
             <div class="navigate">
               <div class="options">
-                <input type="radio" value="A" v-model="userAnswers[currentQuestion]"/>
-                <label for="questions[currentQuestion].a_option">A. {{questions[currentQuestion]?.a_option}}</label><br>
+                <input type="radio" value="0" v-model="userAnswers[currentQuestion]"/>
+                <label for="questions[currentQuestion].options[0].text">A. {{questions[currentQuestion]?.options[0]?.text}}</label><br>
               </div>
               <div class="options">
-                <input type="radio" value="B"  v-model="userAnswers[currentQuestion]" />
-                <label for="this.questions[currentQuestion].b_option">B. {{questions[currentQuestion]?.b_option}}</label><br>
+                <input type="radio" value="1"  v-model="userAnswers[currentQuestion]" />
+                <label for="this.questions[currentQuestion].options[1].text">B. {{questions[currentQuestion]?.options[1]?.text}}</label><br>
               </div>
               <div class="options">
-                <input type="radio" value="C" v-model="userAnswers[currentQuestion]" />
-                <label for="this.questions[currentQuestion].c_option">C. {{questions[currentQuestion]?.c_option}}</label><br>
+                <input type="radio" value="2" v-model="userAnswers[currentQuestion]" />
+                <label for="this.questions[currentQuestion].options[2].text">C. {{questions[currentQuestion]?.options[2]?.text}}</label><br>
               </div>
               <div class="options">
-                <input type="radio" value="D" v-model="userAnswers[currentQuestion]" />
-                <label for="this.questions[currentQuestion].d_option">D. {{questions[currentQuestion]?.d_option}}</label>
+                <input type="radio" value="3" v-model="userAnswers[currentQuestion]" />
+                <label for="this.questions[currentQuestion].options[3].text">D. {{questions[currentQuestion]?.options[3]?.text}}</label>
               </div>
               
           </div>
@@ -77,6 +78,7 @@ export default {
     startQuiz: false,
     userAnswers: new Array().fill(""),
     questions:[],
+    loading: false
   }),
   methods:{
     btnBg(){
@@ -111,38 +113,77 @@ export default {
       if(this.currentQuestion === 0) return 
         this.currentQuestion -= 1
     },
-    submit(){
-        this.$router.push('/final');
-        // const timeFinish = {mins:this.mins, secs:this.secs} 
-        // this.$store.commit("setTimeFinish", timeFinish)
-    },
-    isDisabled(){
-      if(this.currentQuestion >=1) return true
-    },
     async  handleQuestions() {
       try {
+                
         const response = await axios.get('http://localhost:5000/accessment');
-        console.log(response)
-        this.questions = response.data.data
-        console.log('questions',this.questions)
+        // console.log(response)
+         
+        this.questions = JSON.parse(response.data.data['0'].question)
+        localStorage.setItem("questions", JSON.stringify(this.questions))
+        // console.log('questions>>',this.questions)
       } catch (error) {
         console.log(error)
       }
     
-    }
+    },
+    async submit(){
+        // this.$router.push('/final');
+      
+        try {
+          const setScore = JSON.parse(localStorage.getItem("questions"))
+          console.log('checking',setScore)
+
+          for (let i =0; i < setScore.length; i++){
+              const options = setScore[i].options
+              const answer = Number(this.userAnswers[i])
+              console.log('okkk',options)
+              
+              if(options[answer].correct){
+                this.score++
+              }
+
+              console.log('noww >>>>',this.score)
+              
+          }
+          const response = await axios.patch(`http://localhost:5000/students/update/${this.user.id}`,{
+          score: this.score,
+        });
+
+       
+       console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    isDisabled(){
+      if(this.currentQuestion >=1) return true
+    },
+    
   },
    created(){
     
+   
+  
   },
   mounted() {
-   this.handleQuestions()
+   this.handleQuestions() 
+    console.log(this.submit())
+
     const thirtyMins = 60 * 30
     this.startTimer(thirtyMins)
+
+    const session = sessionStorage.getItem('session')
+     const parsedSession = JSON.parse(session)
+     this.user = parsedSession.student
+     console.log(this.user)
+     
   },
   watch:{
     userAnswers:{
-      handler(userAnswers){
-        console.log('answer',userAnswers)
+      handler(userAnswers,id){
+      console.log('answer',...userAnswers)
+        console.log("id", id)
       },
       deep:true
     },
@@ -330,7 +371,6 @@ color: #2B3C4E;
   border-radius: 4px;
   width: 205px;
   height: 41px;
-  margin-top: 130px;
   font-size: 16px;
   line-height: 19px;
   color: white;

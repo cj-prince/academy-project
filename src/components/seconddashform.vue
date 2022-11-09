@@ -8,14 +8,15 @@ import firstdashboard from '.';
       <div class="firstline-status">
           <div class="Information">
               <p class="doa">Date of Application</p>
-              <p class="data">09.09.19</p>
+              <p class="data">{{getFormattedDate(user.created_at)}}</p>
               <hr>
-              <p class="comments">4 days since applied</p>
+              <p class="comments">{{daysRemain}} days since applied</p>
           </div>
           <div class="second-line">
               <p class="doa">Application Status</p>
-              <p class="data">Pending</p>
-              <hr>
+              <p class="data">{{user.is_verified !== false? "APROVED":"PENDING"}}</p>
+              <hr v-if="user.is_verified === false" class="second-linehr">
+              <hr v-if="user.is_verified !== false" class="active">
               <p class="comments">We will get back to you</p>
           </div>
       </div>
@@ -29,7 +30,7 @@ import firstdashboard from '.';
               <div class="assessment-details">
                   <p>We have 4 days left until the next assessment</p>
                   <p>Watch this space</p>
-                  <router-link to="/assessment"><button>Take Assessment</button></router-link>
+                  <button @click="takeAccessment()" :disabled="user.is_verified !== true">Take Assessment</button>
               </div>
           </div>
       </div>
@@ -40,11 +41,41 @@ import firstdashboard from '.';
 
 <script>
 import firstdashboard from './firstdashboard.vue'
+import moment from 'moment';
   export default {
   name: 'DashBoard',
   components: {
       firstdashboard 
+  },
+  data: () =>({
+    user:{is_verified:false,created_at:""},
+    daysRemain:'',
+    
+  }),
+  methods:{
+     getFormattedDate(date) {
+         return moment(date).format("YYYY.MM.DD")
+    },
+    takeAccessment(){
+        if(this.user.is_verified === true){
+           this.$router.push("/assessment")
+        }
+    }
+  
+  },
+    mounted(){
+    const session = sessionStorage.getItem('session')
+     const parsedSession = JSON.parse(session)
+     this.user = parsedSession.student
+      console.log(this.user)
+
+    let dateChange = moment(this.user.created_at).fromNow(true)
+    this.daysRemain = dateChange
+  },
+  computed:{
+   
   }
+
   }
 </script>
 
@@ -72,12 +103,13 @@ display: flex;
 gap: 87px
  }
 .doa{
-font-size:14px;
-color: #4F4F4F;
+    font-size:14px;
+    color: #4F4F4F;
  }
 .data{
-font-weight: 300;
-font-size: 48px
+    font-weight: 300;
+    font-size: 48px;
+    color: #2B3C4E;
  }
 
 hr{
@@ -86,8 +118,14 @@ border: 4px solid #006DF0;
 border-radius: 4px;
 margin: 19px 0 9px;
  }
-.second-line>hr{
-border: 4px solid #F09000;
+.second-linehr{
+    border: 4px solid #F09000;
+ }
+ .active{
+     border: 4px solid #12C52F;
+ }
+ .seconded-line>hr{
+    border: 4px solid #12C52F;;
  }
 .comments{
 font-size: 12px;
@@ -123,23 +161,27 @@ padding: 25px 35px;
   border: none;
  }
 .assessment-details{
-text-align: center;
-font-size: 16.73px;
-font-weight: 400;
-line-height: 20.07px;
-color: #4F4F4F;
-margin: 144px 0
+    text-align: center;
+    font-size: 16.73px;
+    font-weight: 400;
+    line-height: 20.07px;
+    color: #4F4F4F;
+    margin: 144px 0
  }
 .assessment-details button{
-background-color: #B1B1B1;
-color: white;
-cursor: pointer;
-border: none;
-outline: none;
-padding: 10px 42px;
-border-radius: 4px;
-font-weight: 700;
-margin-top: 34px;
+    background-color: #B1B1B1;
+    color: white;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 10px 42px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-top: 34px;
+}
+
+.active{
+    background-color: #12C52F;;
 }
 
 .assessment-details a{

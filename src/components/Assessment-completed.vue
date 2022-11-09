@@ -18,7 +18,7 @@
         </div>
         <p class="textP">We have received your assessment test, we will get back to you soon. <br>
           Best of luck</p>
-        <router-link to="/"><button> Home</button></router-link>
+        <button @click="removeSession"> Home</button>
       </div>
     </div>
     
@@ -33,6 +33,12 @@ export default {
   data: () => ({
 
   }),
+  methods:{
+  removeSession() {
+      localStorage.removeItem("questions")
+      this.$router.push("/dashboard")
+    }
+  }
 }
 </script>
 

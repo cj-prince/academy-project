@@ -5,6 +5,7 @@
         <img src="../assets/dashboard/logo.png" alt="logo">
         <p class="title">Log In</p>
       </div>
+      <Error   :error='error'  v-if="error" />
       <form action="" @submit.prevent= "handleSubmit()">
         <!-- Email -->
     <div class="form-group" :class="{ error: v$.user.email.$errors.length }">
@@ -42,8 +43,10 @@
 
 <script>
 import axios from 'axios'
+
 import useVuelidate from '@vuelidate/core';
 import { required, email, minLength } from '@vuelidate/validators';
+import Error from '@/components/error.vue'
 
 export default {
   name: "siginView",
@@ -51,7 +54,14 @@ export default {
   data: () =>({
     user:{email:"",password:""},
      v$: useVuelidate() 
-    
+export default {
+  name: "signIn",
+  components:{Error},
+  data: () =>({
+    user:{email:"",password:"",university:null},
+    passwordCheck: false,
+    passwordDisplay: false,
+    error: ''
   }),
   validations() {
     return {
@@ -70,14 +80,28 @@ export default {
 
   methods:{
     async  handleSubmit() {
-       try {
+      if(!this.user.email||!this.user.password){
+        return this.error = 'Fields missing'
+      }
+      if(this.user.password.length < 8){
+        this.error = 'Password must have 8 words'
+      }
+      try {
         const response = await axios.post('http://localhost:5000/students/login', {
           email: this.user.email,
           password: this.user.password,
         });
         console.log(response)
         sessionStorage.setItem("session", JSON.stringify(response.data.data));
-        this.$router.push('/applicationform')
+        const session = sessionStorage.getItem('session')
+        const parsedSession = JSON.parse(session)
+        this.user = parsedSession.student
+        if(this.user.address !== null){
+          this.$router.push('/dashboard')
+        }else{
+          this.$router.push('/applicationform')
+        }
+        
       } catch (error) {
         console.log(error)
       }  
@@ -129,6 +153,7 @@ input {
   border: 1.5px solid #bdbdbd;
   padding: 8px;
   border-radius: 4px;
+  /* margin-top: 10px */
 }
 .signin {
   width: 397px;
@@ -165,5 +190,15 @@ a {
 .error-msg {
   color: red;
   font-size: small;
+}
+.pass-word img{
+  position: absolute;
+  top: 45%;
+  right: 37%;
+}
+span{
+  color: #4F8A10;
+	background-color: #DFF2BF;
+  padding: 4px;
 }
 </style>

@@ -18,7 +18,7 @@
         </div>
          <p>We have 4 days left until the next assessment<br>
             Watch this space</p>
-          <router-link to="/questions"><button>Start Assessment</button></router-link>
+          <button @click="takeAccessment()">Start Assessment</button>
       </div>
     </div>
   </div>
@@ -31,8 +31,22 @@ export default {
     firstdashboard,
   },
   data: () => ({
-  
+    user: {score:null}
   }),
+  methods:{
+    takeAccessment(){
+      if(this.user.score === null){
+        this.$router.push('/questions')
+      }
+    }
+  },
+  mounted(){
+    
+    const session = sessionStorage.getItem('session')
+    const parsedSession = JSON.parse(session)
+    this.user = parsedSession.student
+    console.log(this.user.score)
+  }
 }
 </script>
 

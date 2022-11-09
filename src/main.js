@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './axios'
-createApp(App)
+import loadingState from './components/loadingState.vue'
+createApp(App) .component('loadingState', loadingState)
 .use(store)
 .use(router)
 .mount('#app')
