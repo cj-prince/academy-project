@@ -6,13 +6,27 @@
         <p class="title">Log In</p>
       </div>
       <form action="" @submit.prevent= "handleSubmit()">
-        <span v-if="errorField">enter field</span>
-        <label for="lname">Email Address</label><br />
-        <input type="email" id="email" name="email" v-model="user.email"/><br />
+        <!-- Email -->
+    <div class="form-group" :class="{ error: v$.user.email.$errors.length }">
+    <label for="lname">Email Address</label><br />
+    <input type="email" id="email" name="email"  v-model="v$.user.email.$model" /><br />
+ </div>
+  <!-- error message -->
+      <div class="input-errors" v-for="(error, index) of v$.user.email.$errors" :key="index">
+        <div class="error-msg">{{ error.$message }}</div>
+      </div>
+      <!-- password -->
+      <div class="form-group" :class="{ error: v$.user.password.$errors.length }">
         <label for="password">Password</label><br />
-        <span v-if="passwordCheck">Password incorrect</span>
-        <input type="password" id="password" name="password" v-model="user.password"/><br />
-        <button class="signin">Sign In</button>
+      <input type="password" id="password" name="password" v-model="v$.user.password.$model" /><br />
+      </div>
+      <!-- error message -->
+      <div class="input-errors" v-for="(error, index) of v$.user.password.$errors" :key="index">
+        <div class="error-msg">{{ error.$message }}</div>
+      </div>
+  
+       
+         <button :disabled="v$.user.$invalid" class="signin">Sign In</button>
       </form>
       <div class="footer">
         <p>
@@ -28,22 +42,35 @@
 
 <script>
 import axios from 'axios'
+import useVuelidate from '@vuelidate/core';
+import { required, email, minLength } from '@vuelidate/validators';
+
 export default {
-  name: "ForgotPdView",
+  name: "siginView",
+  
   data: () =>({
     user:{email:"",password:""},
-    errorField: false,
-    passwordCheck: false
+     v$: useVuelidate() 
+    
   }),
+  validations() {
+    return {
+      user: {
+        email: {
+          required, email
+        },
+        password: {
+          required,
+          min: minLength(6)
+        },
+      },
+    }
+  },
+
+
   methods:{
     async  handleSubmit() {
-      if(!this.user.email||!this.user.password){
-        return this.errorField = true
-      }
-      if(this.user.password.length < 8){
-        this.passwordCheck = true
-      }
-      try {
+       try {
         const response = await axios.post('http://localhost:5000/students/login', {
           email: this.user.email,
           password: this.user.password,
@@ -134,5 +161,9 @@ a {
 }
 .forgot-password {
   text-decoration: none;
+}
+.error-msg {
+  color: red;
+  font-size: small;
 }
 </style>
