@@ -7,19 +7,27 @@
       </div>
       <Error   :error='error'  v-if="error" />
       <form action="" @submit.prevent= "handleSubmit()">
-        <div>
-          <label for="lname">Email Address</label><br />
-          <input type="email" id="email" name="email" v-model="user.email"/><br />
-        </div>
-        <div class="pass-word">
-          <label for="password">Password</label><br />
-          <input :type="[passwordDisplay ? 'text' : 'password']" id="password" name="password" v-model="user.password"/><br />
-          <img @click="passwordDisplay = !passwordDisplay" src="../assets/dashboard/password.png" alt="">
-          
-        </div>
-        
-        
-        <button class="signin">Sign In</button>
+        <!-- Email -->
+    <div class="form-group" :class="{ error: v$.user.email.$errors.length }">
+    <label for="lname">Email Address</label><br />
+    <input type="email" id="email" name="email"  v-model="v$.user.email.$model" /><br />
+ </div>
+  <!-- error message -->
+      <div class="input-errors" v-for="(error, index) of v$.user.email.$errors" :key="index">
+        <div class="error-msg">{{ error.$message }}</div>
+      </div>
+      <!-- password -->
+      <div class="form-group" :class="{ error: v$.user.password.$errors.length }">
+        <label for="password">Password</label><br />
+      <input type="password" id="password" name="password" v-model="v$.user.password.$model" /><br />
+      </div>
+      <!-- error message -->
+      <div class="input-errors" v-for="(error, index) of v$.user.password.$errors" :key="index">
+        <div class="error-msg">{{ error.$message }}</div>
+      </div>
+  
+       
+         <button :disabled="v$.user.$invalid" class="signin">Sign In</button>
       </form>
       <div class="footer">
         <p>
@@ -35,7 +43,17 @@
 
 <script>
 import axios from 'axios'
+
+import useVuelidate from '@vuelidate/core';
+import { required, email, minLength } from '@vuelidate/validators';
 import Error from '@/components/error.vue'
+
+export default {
+  name: "siginView",
+  
+  data: () =>({
+    user:{email:"",password:""},
+     v$: useVuelidate() 
 export default {
   name: "signIn",
   components:{Error},
@@ -45,6 +63,21 @@ export default {
     passwordDisplay: false,
     error: ''
   }),
+  validations() {
+    return {
+      user: {
+        email: {
+          required, email
+        },
+        password: {
+          required,
+          min: minLength(6)
+        },
+      },
+    }
+  },
+
+
   methods:{
     async  handleSubmit() {
       if(!this.user.email||!this.user.password){
@@ -153,6 +186,10 @@ a {
 }
 .forgot-password {
   text-decoration: none;
+}
+.error-msg {
+  color: red;
+  font-size: small;
 }
 .pass-word img{
   position: absolute;
