@@ -6,11 +6,7 @@
       <p>Please enter email address</p>
       <input type="email"  v-model="email">
     </div>
-    <div>
-       <p>Please enter last password</p>
-      <input type="password"  v-model="password">
-    </div>
-    <button>Submit</button>
+    <button @click="handleSubmit()">Submit</button>
   </div>
 </template>
 
@@ -26,9 +22,17 @@ export default {
   }),
   methods:{
     async handleSubmit(){
-      await axios.post('forgot',{
-        email: this.email
-      })
+      console.log(this.email)
+      try {
+          const response = await axios.post('http://localhost:5000/students/forgotpassword', {
+            email: this.email
+          })
+          sessionStorage.setItem("s", JSON.stringify(response.email));
+      } catch (error) {
+        console.log(error)
+      }
+       
+      
     }
   },
 };

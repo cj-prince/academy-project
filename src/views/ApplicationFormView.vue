@@ -81,28 +81,28 @@ export default {
         this.user.image = reader.result
       }
       reader.readAsDataURL(this.user.image);
-      reader.onload = (event) => {
-        let WIDTH = 800
-        let image_url = event.target.result;
-        let image = document.createElement('img');
-        image.src = image_url;
+      // reader.onload = (event) => {
+      //   let WIDTH = 800
+      //   let image_url = event.target.result;
+      //   let image = document.createElement('img');
+      //   image.src = image_url;
 
-        image.onload = (e) => {
+      //   image.onload = (e) => {
 
-            let canvas = document.createElement('canvas');
-            let ratio = WIDTH / e.target.width;
-            canvas.width = WIDTH;
-            canvas.height = image.height * ratio;
+      //       let canvas = document.createElement('canvas');
+      //       let ratio = WIDTH / e.target.width;
+      //       canvas.width = WIDTH;
+      //       canvas.height = image.height * ratio;
 
-            let context = canvas.getContext('2d');
-            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      //       let context = canvas.getContext('2d');
+      //       context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-            let new_image_url = canvas.toDataURL('image/jpeg', 98)
+      //       let new_image_url = canvas.toDataURL('image/jpeg', 98)
 
-            let image_file = document.createElement('img')
-            image_file.src = new_image_url
-        } 
-      }
+      //       let image_file = document.createElement('img')
+      //       image_file.src = new_image_url
+      //   } 
+      // }
     },
     async  handleSubmit() {
     try {

@@ -140,8 +140,7 @@ export default {
               console.log('okkk',options)
               
               if(options[answer].correct){
-                  this.score++
-                  
+                this.score++
               }
 
               console.log('noww >>>>',this.score)

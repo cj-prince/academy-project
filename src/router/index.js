@@ -14,7 +14,6 @@ const routes = [
   {
     path: '/signup',
     name: 'signup',
-   
     component: () => import('../views/signupView.vue')
   },
   {
@@ -31,6 +30,11 @@ const routes = [
     path: '/resetbyemail',
     name: 'resetPasswordEmail',
     component: () => import('@/components/resetPasswordEmail.vue')
+  },
+  {
+    path: '/resetpassword/:id/:token',
+    name: 'ResetPassword',
+    component: () => import('@/views/ResetPassword.vue')
   },
   {
     path: '/applicationform',

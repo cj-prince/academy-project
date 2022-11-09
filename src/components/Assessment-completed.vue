@@ -35,8 +35,8 @@ export default {
   }),
   methods:{
   removeSession() {
-      localStorage.removeItem("session")
-      this.$router.push("/")
+      localStorage.removeItem("questions")
+      this.$router.push("/dashboard")
     }
   }
 }

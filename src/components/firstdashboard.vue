@@ -1,7 +1,7 @@
 <template>
   <div class="firstdashboard">
     <div class="first-container">
-      <div><img src="../assets/dashboardone/Ellipse.png" alt="ellipse"></div>
+      <div class="sideImg"><img :src="user.image" alt="ellipse"></div>
       <p class="name">{{user.firstname + ' ' + user.lastname}}</p>
       <p class="email">{{user.email}}</p>
       </div>
@@ -32,7 +32,7 @@ export default {
      activeBtn:'',
      user:{email:"",firstname:"",lastname:'',}
   }),
-   mounted(){
+  mounted(){
     const session = sessionStorage.getItem('session')
      const parsedSession = JSON.parse(session)
      this.user = parsedSession.student
@@ -57,6 +57,12 @@ text-align: center;
 color: #FFFFFF;
 letter-spacing: -0.02em;
 margin-bottom: 28px
+}
+.sideImg img{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white;
 }
 
 .name{
