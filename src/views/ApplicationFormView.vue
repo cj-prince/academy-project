@@ -29,9 +29,9 @@
         <div class="form-sub-container" >
           <div class="form-right">
             <label for="fname">First Name</label><br />
-            <input type="text" id="fname" name="fname" v-model="user.firstname" /><br />
+            <input type="text" id="fname" name="fname" v-model="user.firstname" readonly/><br />
             <label for="email">Email</label><br />
-            <input type="email" id="email" name="email" v-model="user.email" /><br />
+            <input type="email" id="email" name="email" v-model="user.email" readonly/><br />
             <label for="address">Address</label><br />
             <input type="text" id="address" name="address" v-model="user.address"/><br />
             <label for="course">Course of Study</label><br />
@@ -39,9 +39,9 @@
           </div>
           <div class="form-left">
             <label for="lname">Last Name</label><br />
-            <input type="text" id="lname" name="lname" v-model="user.lastname" /><br />
+            <input type="text" id="lname" name="lname" v-model="user.lastname" readonly /><br />
             <label for="dob">Date of Birth</label><br />
-            <input type="text" id="dob" name="dob" v-model="user.dob" /><br />
+            <input type="date" id="dob" name="dob" v-model="user.dob" min="1980-01-01" max="2007-01-01" /><br />
             <label for="university">University</label><br />
             <input type="text" id="university" name="university" v-model="user.university" /><br />
             <label for="cgpa">CGPA</label><br />
@@ -59,6 +59,7 @@
   
 <script>
 import axios from 'axios'
+// import useVuelidate from '@vuelidate/core'
 export default {
   name: "ApplicationFormView",
   data:()=> ({
@@ -116,8 +117,10 @@ export default {
         cv: this.user.cv,
         image: this.user.image,
       });
+      this.$toast.success(`Application submitted Successfully`)
       this.$router.push('/dashboard')
     } catch (error) {
+      this.$toast.error(`Invalid Credentials. Please try again`)
       console.log(error)
     }  
   }

@@ -149,7 +149,7 @@ export default {
           const response = await axios.patch(`http://localhost:5000/students/update/${this.user.id}`,{
           score: this.score,
         });
-
+        this.$toast.info(`Assessment Submitted`)
        
        console.log(response)
       } catch (error) {

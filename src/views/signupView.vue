@@ -36,14 +36,14 @@
               <div class="error-msg">{{ error.$message }}</div>
             </div>
             <label for="tel">Phone Number</label><br />
-            <input type="tel" id="tel" name="tel" v-model="v$.user.phone_number.$model" /><br />
+            <input type="tel" id="tel" name="tel" v-model="v$.user.phone_number.$model" maxlength="11" pattern="\d{11}"/><br />
             <!-- Error Message -->
             <div class="input-errors" v-for="(error, index) of v$.user.phone_number.$errors" :key="index">
               <div class="error-msg">{{ error.$message }}</div>
             </div>
 
             <label for="confirm-password">Confirm Password</label><br />
-            <input @input="checkPassword()" type="password" id="confirmPassword" name="confirmPassword"
+            <input  type="password" id="confirmPassword" name="confirmPassword"
               v-model="v$.user.confirmPassword.$model" /><br />
 
             <!-- Error Message -->
@@ -66,7 +66,8 @@
 <script>
 import axios from 'axios'
 import useVuelidate from '@vuelidate/core'
-import { required, email, minLength, sameAs } from '@vuelidate/validators'
+import { required, email, minLength } from '@vuelidate/validators'
+import Error from '@/components/error.vue'
 
 
 export function validName(name) {
@@ -78,7 +79,7 @@ export function validName(name) {
 }
 export default {
   name: "signupView",
-
+  components:{Error},
   data: () => ({
     user: {
       firstname: '',
@@ -88,6 +89,7 @@ export default {
       password: '',
       confirmPassword: '',
     },
+    error: '',
     v$: useVuelidate()
 
   }),
@@ -107,56 +109,42 @@ export default {
           }
         },
         email: { required, email },
-        password: { required, min: minLength(6), },
+        password: { required, min: minLength(8), },
         confirmPassword: {
-          required, sameAsPassword: sameAs('password')
+          required 
 
         },
         phone_number: {
-          required, min: minLength(10),
+          required, min: minLength(11),
 
         }
       },
     }
   },
-
-import Error from '@/components/error.vue'
-export default {
-  name: "signupView",
-  components:{Error},
-  data: () =>({
-    first_name:'',
-    last_name:'',
-    email:'',
-    phone_number:'',
-    password:'',
-    password_confirm:'',
-    error: '',
-    passwordInvalid: false,
-    passwordCheck: false
-  }),
   methods:{
     async  handleSubmit() {
-      if(!this.first_name || !this.last_name || !this.email || !this.phone_number ||!this.password ||!this.password_confirm){
-        return this.error = "Fields cant be empty"
-      }
-      if(this.password !== this.password_confirm){
+      // if(!this.first_name || !this.last_name || !this.email || !this.phone_number ||!this.password ||!this.password_confirm){
+      //   return this.error = "Fields cant be empty"
+      // }
+      if(this.user.password !== this.user.confirmPassword){
         return this.error = "Password don't match"
       }
-      if(this.password.length < 8){
-        return this.error = "Must be greater than 8 chacters"
-      }
+      // if(this.password.length < 8){
+      //   return this.error = "Must be greater than 8 chacters"
+      // }
       try {
         const response = await axios.post('http://localhost:5000/students', {
-          firstname: this.first_name,
-          lastname: this.last_name,
-          email: this.email,
-          phone: this.phone_number,
-          password: this.password,
+          firstname: this.user.firstname,
+          lastname: this.user.lastname,
+          email: this.user.email,
+          phone: this.user.phone_number,
+          password: this.user.password,
         });
         sessionStorage.setItem("session", JSON.stringify(response.token));
+        this.$toast.success(`Signup successful`)
         this.$router.push('/sigin')
       } catch (error) {
+        this.$toast.error(`Please try again`)
         console.log(error)
       }
 

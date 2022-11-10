@@ -66,10 +66,8 @@ export default {
     },
 
     mounted() {
-      
-      
-        
-      }
+    
+    }
       
     },
     created(){

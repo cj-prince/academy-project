@@ -11,7 +11,7 @@
     <div class="form-group" :class="{ error: v$.user.email.$errors.length }">
     <label for="lname">Email Address</label><br />
     <input type="email" id="email" name="email"  v-model="v$.user.email.$model" /><br />
- </div>
+  </div>
   <!-- error message -->
       <div class="input-errors" v-for="(error, index) of v$.user.email.$errors" :key="index">
         <div class="error-msg">{{ error.$message }}</div>
@@ -51,14 +51,10 @@ import Error from '@/components/error.vue'
 export default {
   name: "siginView",
   
-  data: () =>({
-    user:{email:"",password:""},
-     v$: useVuelidate() 
-export default {
-  name: "signIn",
   components:{Error},
   data: () =>({
     user:{email:"",password:"",university:null},
+    v$: useVuelidate(), 
     passwordCheck: false,
     passwordDisplay: false,
     error: ''
@@ -80,12 +76,12 @@ export default {
 
   methods:{
     async  handleSubmit() {
-      if(!this.user.email||!this.user.password){
-        return this.error = 'Fields missing'
-      }
-      if(this.user.password.length < 8){
-        this.error = 'Password must have 8 words'
-      }
+      // if(!this.user.email||!this.user.password){
+      //   return this.error = 'Fields missing'
+      // }
+      // if(this.user.password.length < 8){
+      //   this.error = 'Password must have 8 words'
+      // }
       try {
         const response = await axios.post('http://localhost:5000/students/login', {
           email: this.user.email,
@@ -96,6 +92,7 @@ export default {
         const session = sessionStorage.getItem('session')
         const parsedSession = JSON.parse(session)
         this.user = parsedSession.student
+        this.$toast.success(`Login successful`)
         if(this.user.address !== null){
           this.$router.push('/dashboard')
         }else{
@@ -103,6 +100,7 @@ export default {
         }
         
       } catch (error) {
+        this.$toast.error(`Invalid Credentials. Please try again`)
         console.log(error)
       }  
     }

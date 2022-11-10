@@ -27,6 +27,7 @@ export default {
           const response = await axios.post('http://localhost:5000/students/forgotpassword', {
             email: this.email
           })
+          this.$toast.success(`Email Submitted! Check your email`)
           sessionStorage.setItem("s", JSON.stringify(response.email));
       } catch (error) {
         console.log(error)

@@ -50,6 +50,7 @@ data:() =>({
           password: this.password,
           email: this.email,
         });
+        this.$toast.success(`Password Changed Successfully`)
         this.$router.push("/sigin");
         
       } catch (error) {

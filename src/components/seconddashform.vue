@@ -30,7 +30,7 @@ import firstdashboard from '.';
               <div class="assessment-details">
                   <p>We have 4 days left until the next assessment</p>
                   <p>Watch this space</p>
-                  <button @click="takeAccessment()" :disabled="user.is_verified !== true">Take Assessment</button>
+                  <button @click="takeAccessment()" :disabled="user.is_verified !== true" :class="btnBg()">Take Assessment</button>
               </div>
           </div>
       </div>
@@ -50,6 +50,8 @@ import moment from 'moment';
   data: () =>({
     user:{is_verified:false,created_at:""},
     daysRemain:'',
+    btn: "active1",
+    btn1: 'details-button'
     
   }),
   methods:{
@@ -60,8 +62,14 @@ import moment from 'moment';
         if(this.user.is_verified === true){
            this.$router.push("/assessment")
         }
-    }
-  
+    },
+    btnBg(){
+      if(this.user.is_verified === true){
+        return this.btn
+      } 
+      return this.btn1
+    },
+    
   },
     mounted(){
     const session = sessionStorage.getItem('session')
@@ -168,7 +176,7 @@ padding: 25px 35px;
     color: #4F4F4F;
     margin: 144px 0
  }
-.assessment-details button{
+.details-button{
     background-color: #B1B1B1;
     color: white;
     cursor: pointer;
@@ -180,8 +188,16 @@ padding: 25px 35px;
     margin-top: 34px;
 }
 
-.active{
-    background-color: #12C52F;;
+.active1{
+    background-color: #12C52F;
+    color: white;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 10px 42px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-top: 34px;
 }
 
 .assessment-details a{

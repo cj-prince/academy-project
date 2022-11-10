@@ -1,7 +1,7 @@
 <template>
   <div class="firstdashboard">
     <div class="first-container">
-      <div class="sideImg"><img :src="user.image" alt="ellipse"></div>
+      <div class="sideImg"><img :src="showImage" alt="ellipse"></div>
       <p class="name">{{user.firstname + ' ' + user.lastname}}</p>
       <p class="email">{{user.email}}</p>
       </div>
@@ -29,13 +29,22 @@
 export default {
   name: 'first-dashboard',
   data: () => ({
-     activeBtn:'',
-     user:{email:"",firstname:"",lastname:'',}
+    activeBtn:'',
+    user:{email:"",firstname:"",lastname:'',},
+    img1: '../assets/dashboardone/Ellipse.png'
   }),
   mounted(){
     const session = sessionStorage.getItem('session')
      const parsedSession = JSON.parse(session)
      this.user = parsedSession.student
+  },
+  computed:{
+    showImage(){
+      if(this.user.image === null){
+        return this.img1
+      }
+      return this.user.image
+    }
   }
 }
 </script>
